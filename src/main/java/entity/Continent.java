@@ -1,4 +1,4 @@
-package model.entity;
+package entity;
 
 public class Continent {
 
