@@ -1,4 +1,5 @@
-package model.entity;
+package entity;
 
 public class Player {
+
 }
