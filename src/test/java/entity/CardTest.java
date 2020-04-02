@@ -10,7 +10,7 @@ import org.junit.AfterClass;
 public class CardTest {
 
 
-        Card card = null;
+        Card card_CAVALRY;
 
         @BeforeClass
         public static void beforeAllTesting() {
@@ -19,9 +19,7 @@ public class CardTest {
 
         @Before
         public void beforeTest() {
-            card = new Card(CardType.CAVALRY);
-            card = new Card(CardType.ARTILLERY);
-            card = new Card(CardType.INFANTRY);
+            card_CAVALRY = new Card(CardType.CAVALRY);
         }
 
         @AfterClass
@@ -30,8 +28,8 @@ public class CardTest {
         }
 
         @Test
-        public void testGetCardKind() {
-            assertNotNull(card.getCardType());
+        public void testGetCardType() {
+            assertNotNull(card_CAVALRY.getCardType());
             System.out.println("'AssertNotNull' Test is passed");
         }
 
