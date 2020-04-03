@@ -15,10 +15,6 @@ public class Main {
             return gameState;
         }
 
-        /**
-         * Setter method for the game state.
-         * @param gamePhase current phase
-         */
         public static void setGameState(GameState gamePhase) {
             gameState = gamePhase;
         }
