@@ -1,396 +1,528 @@
 package commandparser;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
-
 import config.Commands;
 import entity.Hmap;
 import entity.Player;
 import exception.InvalidMap;
+import mapparser.MapCommands;
 import mapparser.MapReader;
 import mapparser.MapVerifier;
+import mapparser.MapWriter;
 import playerparser.PlayerCommands;
 
-
+/**
+ * This class reads, parses the command line string from user input.
+ *
+ * @author Mahmoudreza
+ */
 public class CommandParser {
 
-
         Hmap rootMap;
+        MapWriter mapWriter;
         PlayerCommands playerCommands;
-
         String editFilePath = "";
-        boolean isReinfoceArmiesAssigned = false;
+        boolean isReinforceArmiesAssigned = false;
 
+        // default constructor to initialize members
         public CommandParser() {
+            this.mapWriter = new MapWriter();
             this.playerCommands = new PlayerCommands();
             this.rootMap = new Hmap();
         }
 
+        /**
+         * Setter method for the map object.
+         *
+         * @param map object
+         */
         private Hmap setMap(Hmap map) {
             return this.rootMap = map;
         }
 
+        /**
+         * Get map object
+         *
+         * @return the map
+         */
         private Hmap getMap() {
             return rootMap;
         }
 
+        /**
+         * Parses the String and calls the related map edit commands.
+         *
+         * @param command User input Command/String
+         * @return true if command is processed correctly, false otherwise
+         */
         public boolean processMapEditCommands(String command) {
 
             String[] words = command.split(" ");
-            String commandType = words[0];
+            String commandType = words[0], filePath = "";
             MapReader mapReader;
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 
-            if (Commands.MAP_COMMAND_EDIT_CONTINENT.equals(commandType)) {
-                for (int idx = 1; idx < words.length; idx++) {
+            switch (commandType) {
 
-                    if (words[idx].equals(Commands.MAP_COMMAND_OPTION_ADD)) {
+                case Commands.MAP_COMMAND_EDIT_CONTINENT:
 
-                        if (words.length < idx + 3) {
+                    for (int idx = 1; idx < words.length; idx++) {
+
+                        if (words[idx].equals(Commands.MAP_COMMAND_OPTION_ADD)) {
+
+                            if (words.length < idx + 3) {
+                                System.out.println("Invalid command, Try again !!!");
+                                return false;
+                            }
+
+                            MapCommands.addContinent(getMap(), words[idx + 1], words[idx + 2], "");
+                            idx = idx + 2;
+
+                        } else if (words[idx].equals(Commands.MAP_COMMAND_OPTION_REMOVE)) {
+
+                            if (words.length < idx + 2) {
+                                System.out.println("Invalid command, Try again !!!");
+                                return false;
+                            }
+                            MapCommands.removeContinent(getMap(), words[idx + 1]);
+                            idx = idx + 1;
+
+                        } else {
                             System.out.println("Invalid command, Try again !!!");
-                            return false;
                         }
+                    }
+                    break;
 
+                case Commands.MAP_COMMAND_EDIT_COUNTRY:
 
-                    } else if (words[idx].equals(Commands.MAP_COMMAND_OPTION_REMOVE)) {
+                    for (int idx = 1; idx < words.length; idx++) {
 
-                        if (words.length < idx + 2) {
+                        if (words[idx].equals(Commands.MAP_COMMAND_OPTION_ADD)) {
+
+                            if (words.length < idx + 3) {
+                                System.out.println("Invalid command, Try again !!!");
+                                return false;
+                            }
+
+                            MapCommands.addCountry(getMap(), words[idx + 1], words[idx + 2]);
+                            idx = idx + 2;
+
+                        } else if (words[idx].equals(Commands.MAP_COMMAND_OPTION_REMOVE)) {
+
+                            if (words.length < idx + 2) {
+                                System.out.println("Invalid command, Try again !!!");
+                                return false;
+                            }
+
+                            MapCommands.removeCountry(getMap(), words[idx + 1]);
+                            idx = idx + 1;
+
+                        } else {
                             System.out.println("Invalid command, Try again !!!");
-                            return false;
                         }
+                    }
+                    break;
 
+                case Commands.MAP_COMMAND_EDIT_NEIGHBOR:
 
-                    } else {
+                    for (int idx = 1; idx < words.length; idx++) {
+
+                        if (words[idx].equals(Commands.MAP_COMMAND_OPTION_ADD)) {
+
+                            if (words.length < idx + 3) {
+                                System.out.println("Invalid command, Try again !!!");
+                                return false;
+                            }
+
+                            MapCommands.addNeighborCountry(getMap(), words[idx + 1], words[idx + 2]);
+                            idx = idx + 2;
+
+                        } else if (words[idx].equals(Commands.MAP_COMMAND_OPTION_REMOVE)) {
+
+                            if (words.length < idx + 3) {
+                                System.out.println("Invalid command, Try again !!!");
+                                return false;
+                            }
+
+                            MapCommands.removeNeighborCountry(getMap(), words[idx + 1], words[idx + 2]);
+                            idx = idx + 2;
+
+                        } else {
+                            System.out.println("Invalid command, Try again !!!");
+                        }
+                    }
+                    break;
+
+                case Commands.MAP_COMMAND_SHOWMAP:
+                    MapCommands.mapEditorShowmap(getMap());
+                    break;
+
+                case Commands.MAP_COMMAND_SAVEMAP:
+
+                    if (words.length < 2) {
                         System.out.println("Invalid command, Try again !!!");
+                        break;
                     }
-                }
-            } else if (Commands.MAP_COMMAND_EDIT_COUNTRY.equals(commandType)) {
-                for (int idx = 1; idx < words.length; idx++) {
 
-                    if (words[idx].equals(Commands.MAP_COMMAND_OPTION_ADD)) {
+                    filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\" + words[1];
 
-                        if (words.length < idx + 3) {
-                            System.out.println("Invalid command, Try again !!!");
-                            return false;
+                    // save map file should be similar to the one which was edited previously
+                    if (!editFilePath.isEmpty()) {
+                        if (!editFilePath.equals(filePath)) {
+                            System.out.println("Please give same filename as you have given in editmap.");
+                            break;
                         }
+                    }
 
+                    try {
+                        MapVerifier.verifyMap(getMap());
+                    } catch (InvalidMap e1) {
+                        System.out.println("Exception: " + e1.toString());
+                        break;
+                    }
 
-                    } else if (words[idx].equals(Commands.MAP_COMMAND_OPTION_REMOVE)) {
+                    System.out.println("Saving File at: " + filePath);
+                    File outputMapFile = new File(filePath);
+                    mapWriter.writeMapFile(getMap(), outputMapFile);
+                    break;
 
-                        if (words.length < idx + 2) {
-                            System.out.println("Invalid command, Try again !!!");
-                            return false;
-                        }
+                case Commands.MAP_COMMAND_EDITMAP:
 
-
-                    } else {
+                    if (words.length < 2) {
                         System.out.println("Invalid command, Try again !!!");
+                        break;
                     }
-                }
-            } else if (Commands.MAP_COMMAND_EDIT_NEIGHBOR.equals(commandType)) {
-                for (int idx = 1; idx < words.length; idx++) {
 
-                    if (words[idx].equals(Commands.MAP_COMMAND_OPTION_ADD)) {
+                    editFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\" + words[1];
+                    File editMapFile = new File(editFilePath);
+                    mapReader = new MapReader();
 
-                        if (words.length < idx + 3) {
-                            System.out.println("Invalid command, Try again !!!");
-                            return false;
+                    if (editMapFile.exists()) {
+                        try {
+                            setMap(mapReader.readMapFile(editMapFile));
+                        } catch (InvalidMap e) {
+                            System.out.println("Exception: " + e.toString());
                         }
-
-
-                    } else if (words[idx].equals(Commands.MAP_COMMAND_OPTION_REMOVE)) {
-
-                        if (words.length < idx + 3) {
-                            System.out.println("Invalid command, Try again !!!");
-                            return false;
-                        }
-
-
                     } else {
+                        System.out.println("Given map file does not exist. New Map file has been created.");
+                        try {
+                            editMapFile.createNewFile();
+                        } catch (IOException e) {
+                            System.out.println("Exception: " + e.toString());
+                        }
+                    }
+                    break;
+
+                case Commands.MAP_COMMAND_VALIDATEMAP:
+
+                    try {
+                        MapVerifier.verifyMap(getMap());
+                    } catch (InvalidMap e1) {
+                        System.out.println("Exception: " + e1.toString());
+                    }
+                    break;
+
+                case Commands.MAP_COMMAND_LOADMAP:
+
+                    if (words.length < 2) {
                         System.out.println("Invalid command, Try again !!!");
+                        break;
                     }
-                }
 
-            } else if (Commands.MAP_COMMAND_SAVEMAP.equals(commandType)) {
-                if (words.length < 2) {
+                    mapReader = new MapReader();
+
+                    if (null == classloader.getResource(words[1])) {
+                        System.out.println("Exception: File does not exist: " + words[1]);
+                        break;
+                    }
+
+                    File inputMapFile = new File(classloader.getResource(words[1]).getFile().replace("%20", " "));
+
+                    if (inputMapFile.exists()) {
+                        try {
+                            setMap(mapReader.readMapFile(inputMapFile));
+                            return true;
+                        } catch (InvalidMap e) {
+                            System.out.println("Exception: " + e.toString());
+                        }
+                    } else {
+                        System.out.println("Exception: File does not exist: " + inputMapFile.getAbsolutePath());
+                    }
+                    break;
+
+                default:
                     System.out.println("Invalid command, Try again !!!");
-                    return false;
-                }
-
-
-                try {
-                    MapVerifier.verifyMap(getMap());
-                } catch (InvalidMap e1) {
-                    System.out.println("Exception: " + e1.toString());
-                    return false;
-                }
-
-            } else if (Commands.MAP_COMMAND_EDITMAP.equals(commandType)) {
-                if (words.length < 2) {
-                    System.out.println("Invalid command, Try again !!!");
-                    return false;
-                }
-
-                editFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\" + words[1];
-                File editMapFile = new File(editFilePath);
-                mapReader = new MapReader();
-
-                if (editMapFile.exists()) {
-                    try {
-                        setMap(mapReader.readMapFile(editMapFile));
-                    } catch (InvalidMap e) {
-                        System.out.println("Exception: " + e.toString());
-                    }
-                } else {
-                    System.out.println("Given map file does not exist. New Map file has been created.");
-                    try {
-                        editMapFile.createNewFile();
-                    } catch (IOException e) {
-                        System.out.println("Exception: " + e.toString());
-                    }
-                }
-            } else if (Commands.MAP_COMMAND_VALIDATEMAP.equals(commandType)) {
-                try {
-                    MapVerifier.verifyMap(getMap());
-                } catch (InvalidMap e1) {
-                    System.out.println("Exception: " + e1.toString());
-                }
-            } else if (Commands.MAP_COMMAND_LOADMAP.equals(commandType)) {
-                if (words.length < 2) {
-                    System.out.println("Invalid command, Try again !!!");
-                    return false;
-                }
-
-                mapReader = new MapReader();
-
-                if (null == classloader.getResource(words[1])) {
-                    System.out.println("Exception: File does not exist: " + words[1]);
-                    return false;
-                }
-
-                File inputMapFile = new File(classloader.getResource(words[1]).getFile().replace("%20", " "));
-
-                if (inputMapFile.exists()) {
-                    try {
-                        setMap(mapReader.readMapFile(inputMapFile));
-                        return true;
-                    } catch (InvalidMap e) {
-                        System.out.println("Exception: " + e.toString());
-                    }
-                } else {
-                    System.out.println("Exception: File does not exist: " + inputMapFile.getAbsolutePath());
-                }
-            } else {
-                System.out.println("Invalid command, Try again !!!");
+                    break;
             }
             return false;
         }
 
+        /**
+         * Parses the String and calls the related player commands.
+         *
+         * @param command User input Command/String
+         * @return true if command is processed correctly, false otherwise
+         */
         public boolean processGamePlayCreatePlayerCommands(String command) {
 
             String[] words = command.split(" ");
             String commandType = words[0];
 
-            if (Commands.MAP_COMMAND_GAMEPLAYER.equals(commandType)) {
-                for (int idx = 1; idx < words.length; idx++) {
-                    if (words[idx].equals(Commands.MAP_COMMAND_OPTION_ADD)) {
+            switch (commandType) {
 
-                        if (words.length < idx + 2) {
+                case Commands.MAP_COMMAND_SHOWMAP:
+                    MapCommands.mapEditorShowmap(getMap());
+                    break;
+
+                case Commands.MAP_COMMAND_GAMEPLAYER:
+
+                    for (int idx = 1; idx < words.length; idx++) {
+                        if (words[idx].equals(Commands.MAP_COMMAND_OPTION_ADD)) {
+
+                            if (words.length < idx + 2) {
+                                System.out.println("Invalid command, Try again !!!");
+                                return false;
+                            }
+
+                            String playerName = words[idx + 1];
+                            playerCommands.createPlayer(playerName);
+                            idx = idx + 1;
+
+                        } else if (words[idx].equals(Commands.MAP_COMMAND_OPTION_REMOVE)) {
+
+                            if (words.length < idx + 2) {
+                                System.out.println("Invalid command, Try again !!!");
+                                return false;
+                            }
+
+                            String playerName = words[idx + 1];
+                            playerCommands.removePlayer(playerName);
+                            idx = idx + 1;
+
+                        } else {
                             System.out.println("Invalid command, Try again !!!");
-                            return false;
+                            break;
+                        }
+                    }
+                    break;
+
+                case Commands.MAP_COMMAND_POPULATE_COUNTRIES:
+
+                    playerCommands.setCountryList(playerCommands.getCountryListFromMap(getMap()));
+
+                    if (playerCommands.assignArmiesToPlayers()) {
+
+                        playerCommands.populateCountries(getMap());
+                        playerCommands.intitializeArmiesForAllCountries();
+
+                        for (Player p : playerCommands.getPlayersList()) {
+                            int countryCount = p.getAssignedCountry().size();
+                            System.out.println("Number of Countries for Player : " + p.getName() + " = " + countryCount);
                         }
 
-                        String playerName = words[idx + 1];
-                        playerCommands.createPlayer(playerName);
-                        idx = idx + 1;
-
-                    } else if (words[idx].equals(Commands.MAP_COMMAND_OPTION_REMOVE)) {
-
-                        if (words.length < idx + 2) {
-                            System.out.println("Invalid command, Try again !!!");
-                            return false;
-                        }
-
-                        String playerName = words[idx + 1];
-                        playerCommands.removePlayer(playerName);
-                        idx = idx + 1;
-
-                    } else {
-                        System.out.println("Invalid command, Try again !!!");
-                        break;
+                        playerCommands.setCurrentPlayer(playerCommands.getPlayersList().get(0));
+                        playerCommands.setCountryMap(playerCommands.getCountryMapFromList(playerCommands.getCountryList()));
+                        return true;
                     }
-                }
-            } else if (Commands.MAP_COMMAND_POPULATE_COUNTRIES.equals(commandType)) {
-                playerCommands.setCountryList(playerCommands.getCountryListFromMap(getMap()));
+                    break;
 
-                if (playerCommands.assignArmiesToPlayers()) {
-
-                    playerCommands.populateCountries(getMap());
-                    playerCommands.intitializeArmiesForAllCountries();
-
-                    for (Player p : playerCommands.getPlayersList()) {
-                        int countryCount = p.getAssignedCountry().size();
-                        System.out.println("Number of Countries for Player : " + p.getName() + " = " + countryCount);
-                    }
-
-                    playerCommands.setCurrentPlayer(playerCommands.getPlayersList().get(0));
-                    playerCommands.setCountryMap(playerCommands.getCountryMapFromList(playerCommands.getCountryList()));
-                    return true;
-                }
-            } else {
-                System.out.println("Invalid command, Try again !!!");
+                default:
+                    System.out.println("Invalid command, Try again !!!");
+                    break;
             }
 
             return false;
         }
 
-        public boolean processGamePlayStartupCommands(Scanner sc) {
+        /**
+         * Parses the String and calls the related game play startup commands.
+         *
+         * @param scanner scanner object
+         * @return true if command is processed correctly, false otherwise
+         */
+        public boolean processGamePlayStartupCommands(Scanner scanner) {
 
             System.out.println("Current state: Gameplay startup phase (placearmy, placeall, showmap)");
             System.out.println("Current Player: " + playerCommands.getCurrentPlayer().getName() +
                     ", number of armies left = " + playerCommands.getCurrentPlayer().getArmies());
 
-            String command = sc.nextLine();
+            String command = scanner.nextLine();
             String[] words = command.split(" ");
             String commandType = words[0];
 
-            if (Commands.MAP_COMMAND_SHOWMAP.equals(commandType)) {
-                playerCommands.gamePlayShowmap();
-            } else if (Commands.MAP_COMMAND_PLACE_ARMY.equals(commandType)) {
-                if (words.length < 2) {
-                    System.out.println("Invalid command, Try again !!!");
-                    return false;
-                }
+            switch (commandType) {
 
-                if (playerCommands.placeArmy(words[1])) {
-                    playerCommands.changeCurrentPlayer();
-                }
+                case Commands.MAP_COMMAND_SHOWMAP:
+                    playerCommands.gamePlayShowmap();
+                    break;
 
-                if (playerCommands.isAllPlayersArmiesExhausted()) {
+                case Commands.MAP_COMMAND_PLACE_ARMY:
+
+                    if (words.length < 2) {
+                        System.out.println("Invalid command, Try again !!!");
+                        break;
+                    }
+
+                    if (playerCommands.placeArmy(words[1])) {
+                        playerCommands.changeCurrentPlayer();
+                    }
+
+                    if (playerCommands.isAllPlayersArmiesExhausted()) {
+                        playerCommands.setCurrentPlayer(playerCommands.getPlayersList().get(0));
+                        return true;
+                    }
+                    break;
+
+                case Commands.MAP_COMMAND_PLACE_ALL:
+                    playerCommands.placeAll();
                     playerCommands.setCurrentPlayer(playerCommands.getPlayersList().get(0));
                     return true;
-                }
-            } else if (Commands.MAP_COMMAND_PLACE_ALL.equals(commandType)) {
-                playerCommands.placeAll();
-                playerCommands.setCurrentPlayer(playerCommands.getPlayersList().get(0));
-                return true;
-            } else {
-                System.out.println("Invalid command, Try again !!!");
+
+                default:
+                    System.out.println("Invalid command, Try again !!!");
+                    break;
             }
 
             return false;
         }
 
-        public boolean processGamePlayReinforcementCommands(Scanner sc) {
+        /**
+         * Parses the String and calls the related game play reinforcement commands.
+         *
+         * @param scanner scanner object
+         * @return true if command is processed correctly, false otherwise
+         */
+        public boolean processGamePlayReinforcementCommands(Scanner scanner) {
 
-            if (!isReinfoceArmiesAssigned) {
+            if (!isReinforceArmiesAssigned) {
                 playerCommands.assignReinforceArmiesToPlayers();
-                isReinfoceArmiesAssigned = true;
+                isReinforceArmiesAssigned = true;
             }
 
             System.out.println("Current state: Gameplay reinforcement phase (reinforce, showmap)");
             System.out.println("Current Player: " + playerCommands.getCurrentPlayer().getName()
                     + ", Armies left for reinforcement = " + playerCommands.getCurrentPlayer().getArmies());
 
-            String command = sc.nextLine();
+            String command = scanner.nextLine();
             String[] words = command.split(" ");
             String commandType = words[0];
 
-            if (Commands.MAP_COMMAND_SHOWMAP.equals(commandType)) {
-                playerCommands.gamePlayShowmap();
-            } else if (Commands.MAP_COMMAND_REINFORCE.equals(commandType)) {
-                if (words.length < 3) {
-                    System.out.println("Invalid command, Try again !!!");
-                    return false;
-                }
+            switch (commandType) {
 
-                String countryName = words[1];
-                int numberOfArmies = 0;
+                case Commands.MAP_COMMAND_SHOWMAP:
+                    playerCommands.gamePlayShowmap();
+                    break;
 
-                try {
-                    numberOfArmies = Integer.parseInt(words[2]);
-                } catch (Exception e) {
-                    System.out.println("Exception: " + e.toString());
-                    return false;
-                }
+                case Commands.MAP_COMMAND_REINFORCE:
 
-                if (numberOfArmies <= 0) {
-                    System.out.println("You have entered invalid number of armies.");
-                    return false;
-                }
-
-                if (!playerCommands.isCountryBelongToPlayer(playerCommands.getCurrentPlayer(), countryName))
-                    return false;
-
-                if (playerCommands.reinforceArmiesForCurrentPlayer(countryName, numberOfArmies))
-                    return true;
-            } else {
-                System.out.println("Invalid command, Try again !!!");
-            }
-
-            return false;
-        }
-
-        public boolean processGamePlayFortifyCommands(Scanner sc) {
-            System.out.println("Current state: Gameplay fortify phase (fortify, showmap)");
-            System.out.println("Current Player: " + playerCommands.getCurrentPlayer().getName());
-
-            boolean isForifyDone = false;
-            String command = sc.nextLine();
-            String[] words = command.split(" ");
-            String commandType = words[0];
-
-            if (Commands.MAP_COMMAND_SHOWMAP.equals(commandType)) {
-                playerCommands.gamePlayShowmap();
-            } else if (Commands.MAP_COMMAND_FORTIFY.equals(commandType)) {
-                if (words.length < 2) {
-                    System.out.println("Invalid command length. Try again !!!");
-                    return false;
-                }
-
-                if (words[1].equalsIgnoreCase(Commands.MAP_COMMAND_FORTIFY_OPTION_NONE)) {
-                    System.out.println("You have chosen to skip fortify.");
-                    isForifyDone = true;
-                } else {
-
-                    if (words.length < 4) {
-                        System.out.println("Invalid command length. Try again !!!");
-                        return false;
+                    if (words.length < 3) {
+                        System.out.println("Invalid command, Try again !!!");
+                        break;
                     }
 
-                    int numArmies = 0;
+                    String countryName = words[1];
+                    int numberOfArmies = 0;
 
                     try {
-                        numArmies = Integer.parseInt(words[3]);
+                        numberOfArmies = Integer.parseInt(words[2]);
                     } catch (Exception e) {
                         System.out.println("Exception: " + e.toString());
                         return false;
                     }
 
-                    if (numArmies <= 0) {
-                        System.out.println("Exception: Invalid number of armies");
+                    if (numberOfArmies <= 0) {
+                        System.out.println("You have entered invalid number of armies.");
                         return false;
                     }
 
-                    if (playerCommands.fortifyCurrentPlayer(words[1], words[2], numArmies))
-                        isForifyDone = true;
-                }
+                    if (!playerCommands.isCountryBelongToPlayer(playerCommands.getCurrentPlayer(), countryName))
+                        return false;
 
-                if (isForifyDone) {
-                    if (playerCommands.isLastPlayer(playerCommands.getCurrentPlayer())) {
-                        isReinfoceArmiesAssigned = false;
-                        System.out.println("***** All players have played. Going back to reinforcement again *****");
+                    if (playerCommands.reinforceArmiesForCurrentPlayer(countryName, numberOfArmies))
+                        return true;
+                    break;
+
+                default:
+                    System.out.println("Invalid command, Try again !!!");
+                    break;
+            }
+
+            return false;
+        }
+
+        /**
+         * Parses the String and calls the related game play fortify commands.
+         *
+         * @param scanner scanner object
+         * @return true if command is processed correctly, false otherwise
+         */
+        public boolean processGamePlayFortifyCommands(Scanner scanner) {
+            System.out.println("Current state: Gameplay fortify phase (fortify, showmap)");
+            System.out.println("Current Player: " + playerCommands.getCurrentPlayer().getName());
+
+            boolean isForifyDone = false;
+            String command = scanner.nextLine();
+            String[] words = command.split(" ");
+            String commandType = words[0];
+
+            switch (commandType) {
+
+                case Commands.MAP_COMMAND_SHOWMAP:
+                    playerCommands.gamePlayShowmap();
+                    break;
+
+                case Commands.MAP_COMMAND_FORTIFY:
+
+                    if (words.length < 2) {
+                        System.out.println("Invalid command length. Try again !!!");
+                        return false;
                     }
-                    playerCommands.changeCurrentPlayer();
-                }
-            } else {
-                System.out.println("Invalid command, Try again !!!");
+
+                    if (words[1].equalsIgnoreCase(Commands.MAP_COMMAND_FORTIFY_OPTION_NONE)) {
+                        System.out.println("You have chosen to skip fortify.");
+                        isForifyDone = true;
+                    } else {
+
+                        if (words.length < 4) {
+                            System.out.println("Invalid command length. Try again !!!");
+                            return false;
+                        }
+
+                        int numArmies = 0;
+
+                        try {
+                            numArmies = Integer.parseInt(words[3]);
+                        } catch (Exception e) {
+                            System.out.println("Exception: " + e.toString());
+                            return false;
+                        }
+
+                        if (numArmies <= 0) {
+                            System.out.println("Exception: Invalid number of armies");
+                            return false;
+                        }
+
+                        if (playerCommands.fortifyCurrentPlayer(words[1], words[2], numArmies))
+                            isForifyDone = true;
+                    }
+
+                    if (isForifyDone) {
+                        // check all players have played
+                        if (playerCommands.isLastPlayer(playerCommands.getCurrentPlayer())) {
+                            isReinforceArmiesAssigned = false;
+                            System.out.println("***** All players have played. Going back to reinforcement again *****");
+                        }
+                        playerCommands.changeCurrentPlayer();
+                    }
+                    break;
+
+                default:
+                    System.out.println("Invalid command, Try again !!!");
+                    break;
             }
 
             return isForifyDone;
         }
     }
-
-
