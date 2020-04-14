@@ -62,7 +62,7 @@ public class CommandParser {
             String[] words = command.split(" ");
             String commandType = words[0], filePath = "";
             MapReader mapReader;
-            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
             switch (commandType) {
 
@@ -233,12 +233,12 @@ public class CommandParser {
 
                     mapReader = new MapReader();
 
-                    if (null == classloader.getResource(words[1])) {
+                    if (null == classLoader.getResource(words[1])) {
                         System.out.println("Exception: File does not exist: " + words[1]);
                         break;
                     }
 
-                    File inputMapFile = new File(classloader.getResource(words[1]).getFile().replace("%20", " "));
+                    File inputMapFile = new File(classLoader.getResource(words[1]).getFile());
 
                     if (inputMapFile.exists()) {
                         try {

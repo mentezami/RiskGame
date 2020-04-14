@@ -1,5 +1,11 @@
 package config;
 
+/**
+ * List of Commands.
+ *
+ * @author Mahmoudreza
+ * @version 0.0.1
+ */
 public class Commands {
 
         public static final String MAP_COMMAND_EDIT_CONTINENT = "editcontinent";

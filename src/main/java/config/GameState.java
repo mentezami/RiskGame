@@ -1,5 +1,11 @@
 package config;
 
+/**
+ * Enum for various game phases.
+ *
+ * @author Mahmoudreza
+ * @version 0.0.1
+ */
 public enum GameState {
 
         RISK_STATE_MAP_EDITING,
