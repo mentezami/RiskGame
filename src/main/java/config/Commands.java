@@ -1,7 +1,7 @@
 package config;
 
 /**
- * List of Commands.
+ * This class includes list of Commands.
  *
  * @author Mahmoudreza
  * @version 0.0.1
