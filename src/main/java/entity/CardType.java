@@ -1,7 +1,7 @@
 package entity;
 
 /**
- * Enum for various card types.
+ * This enum is for various card types.
  *
  * @author Mahmoudreza
  * @version 0.0.1
@@ -9,7 +9,7 @@ package entity;
 public enum CardType {
 
     /**
-     * The Card enum
+     * The Card Types
      */
     INFANTRY, CAVALRY, ARTILLERY
 }

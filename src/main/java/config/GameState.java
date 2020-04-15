@@ -1,7 +1,7 @@
 package config;
 
 /**
- * Enum for various game phases.
+ * This Enum includes various game phases.
  *
  * @author Mahmoudreza
  * @version 0.0.1

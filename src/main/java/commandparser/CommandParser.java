@@ -17,6 +17,7 @@ import playerparser.PlayerCommands;
  * This class reads, parses the command line string from user input.
  *
  * @author Mahmoudreza
+ * @version 0.0.1
  */
 public class CommandParser {
 
