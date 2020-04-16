@@ -8,8 +8,8 @@ import java.util.List;
  * This class defines properties for a continent like name of continent,
  * controls values and list of the countries.
  *
- * @author Mahmoudreza
  * @see Country
+ * @author Mahmoudreza
  * @version 0.0.1
  */
 public class Continent {
