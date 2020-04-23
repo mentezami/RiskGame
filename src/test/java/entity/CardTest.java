@@ -19,7 +19,8 @@ public class CardTest {
     Card card_ARTILLERY;
 
     /**
-     * This method runs before all test methods only one times
+     * This method runs before all test methods only one times.
+     *
      */
     @BeforeClass
     public static void beforeAllTesting() {
@@ -27,7 +28,8 @@ public class CardTest {
     }
 
     /**
-     * This Method runs before test methods
+     * This Method runs before test methods.
+     *
      */
     @Before
     public void beforeTest() {
@@ -38,6 +40,7 @@ public class CardTest {
 
     /**
      * This method run after all test methods only one time.
+     *
      */
     @AfterClass
     public static void afterPerformingTests() {
@@ -46,6 +49,7 @@ public class CardTest {
 
     /**
      * This method test get card INFANTRY type.
+     *
      */
     @Test
     public void testCardINFANTRY() {
@@ -55,6 +59,7 @@ public class CardTest {
 
     /**
      * This method test get card CAVALRY type.
+     *
      */
     @Test
     public void testCardCAVALRY() {
@@ -64,6 +69,7 @@ public class CardTest {
 
     /**
      * This method test get card ARTILLERY type.
+     *
      */
     @Test
     public void testCardARTILLERY() {
