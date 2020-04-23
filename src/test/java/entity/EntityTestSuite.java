@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * This is a Test suite Class for testing Entity
+ * This is a Test suite Class for all classes in Entity package.
  *
  * @author Mahmoudreza
  * @version 0.0.1

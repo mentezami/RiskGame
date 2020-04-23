@@ -8,6 +8,7 @@ import mapparser.MapParserTestSuite;
 import playerparser.PlayerParserTestSuite;
 
 /**
+ *This is a Test suite Class for all packages.
  *
  * @author Mahmoudreza
  * @version 0.0.1
