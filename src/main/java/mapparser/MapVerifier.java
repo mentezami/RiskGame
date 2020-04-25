@@ -10,10 +10,22 @@ import entity.Country;
 import entity.Hmap;
 import exception.InvalidMap;
 
+/**
+ * This class validates the map.
+ *
+ * @author Mahmoudreza
+ * @version 0.0.1
+ */
 public class MapVerifier {
 
     static String message = "";
 
+    /**
+     * This method validates the map.
+     *
+     * @param map map object for verifying map
+     * @throws InvalidMap if map has some errors
+     */
     public static void verifyMap(Hmap map) throws InvalidMap {
         if (map == null) {
             throw new InvalidMap("Input map is not valid. It's null");
@@ -34,6 +46,12 @@ public class MapVerifier {
         }
     }
 
+    /**
+     * This method verifies the continents.
+     *
+     * @param map map object to verify continents of the map
+     * @throws InvalidMap throws if map has some errors
+     */
     public static void verifyContinents(Hmap map) throws InvalidMap {
 
         for (Continent continent : map.getContinents()) {
@@ -50,6 +68,13 @@ public class MapVerifier {
         }
     }
 
+    /**
+     * This method checks that the continents are connected or not.
+     *
+     * @param continent continent to be verified
+     * @param map object of the map
+     * @return true if continent forms a connected map.
+     */
     public static boolean isContinentConnectedGraph(Continent continent, Hmap map) {
 
         runDfsOnCounty(continent.getCountries().get(0), map);
@@ -70,7 +95,12 @@ public class MapVerifier {
         return returnValue;
     }
 
-
+    /**
+     * This method traverse the countries in BFS Manner.
+     *
+     * @param country country to be traversed in bfs
+     * @param map map object
+     */
     public static void runDfsOnCounty(Country country, Hmap map) {
 
         if (country.isVisited() == true)
@@ -85,21 +115,32 @@ public class MapVerifier {
         }
     }
 
-
+    /**
+     * This method checks whether the country is connected or not.
+     *
+     * @param country country to be verified
+     * @param map object of the map
+     * @throws InvalidMap throws InvalidMapException if map is not valid
+     */
     private static void verifyCountry(Country country, Hmap map) throws InvalidMap {
-        List<Country> adjCounList = country.getAdjacentCountries();
+        List<Country> adjCountList = country.getAdjacentCountries();
 
-        if ((adjCounList == null) || (adjCounList.size() < 1)) {
+        if ((adjCountList == null) || (adjCountList.size() < 1)) {
             throw new InvalidMap("Country: " + country.getName() + " must have atleast one adjacent country.");
         } else {
-            for (Country adjCoun : adjCounList) {
+            for (Country adjCoun : adjCountList) {
                 if (!adjCoun.getAdjacentCountries().contains(country))
                     adjCoun.getAdjacentCountries().add(country);
             }
         }
     }
 
-
+    /**
+     * This method checks that Continents form a connected graph (A Map).
+     *
+     * @param map object of the map
+     * @return true if map is a connected graph
+     */
     public static boolean isMapConnectedGraph(Hmap map) {
 
         if (map.getContinents().size() < 2) {
@@ -125,7 +166,12 @@ public class MapVerifier {
         return returnValue;
     }
 
-
+    /**
+     * This method traverses the continents in BFS Manner.
+     *
+     * @param continent continent to be traversed in bfs
+     * @param map map object
+     */
     public static void runDfsContinent(Continent continent, Hmap map) {
 
         if (continent.isVisited() == true)
@@ -140,7 +186,13 @@ public class MapVerifier {
         }
     }
 
-
+    /**
+     * This method returns the adjacent continent as a list of particular continent.
+     *
+     * @param continent continent whose adjacent countries to be found
+     * @param map map object
+     * @return the adjacent continent as a list of particular continent.
+     */
     public static List<Continent> getAdjacentContinents(Continent continent, Hmap map) {
         List<Continent> adjacentContinents = new ArrayList<Continent>();
         HashSet<Country> adjCounMasterSet = new HashSet<Country>();
@@ -162,7 +214,12 @@ public class MapVerifier {
         return adjacentContinents;
     }
 
-
+    /**
+     * This method checks whether country belongs to only one continent or not.
+     *
+     * @param map map object
+     * @throws InvalidMap throws InvalidMapException if map is not valid.
+     */
     public static void checkCountryBelongToOnlyOneContinent(Hmap map) throws InvalidMap {
         HashMap<Country, Integer> countryBelongToContinentCount = new HashMap<Country, Integer>();
 

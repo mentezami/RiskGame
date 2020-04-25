@@ -316,7 +316,7 @@ public class CommandParser {
                     if (playerCommands.assignArmiesToPlayers()) {
 
                         playerCommands.populateCountries(getMap());
-                        playerCommands.intitializeArmiesForAllCountries();
+                        playerCommands.initializeArmiesForAllCountries();
 
                         for (Player p : playerCommands.getPlayersList()) {
                             int countryCount = p.getAssignedCountry().size();
@@ -356,7 +356,7 @@ public class CommandParser {
             switch (commandType) {
 
                 case Commands.MAP_COMMAND_SHOWMAP:
-                    playerCommands.gamePlayShowmap();
+                    playerCommands.gamePlayShowMap();
                     break;
 
                 case Commands.MAP_COMMAND_PLACE_ARMY:
@@ -413,7 +413,7 @@ public class CommandParser {
             switch (commandType) {
 
                 case Commands.MAP_COMMAND_SHOWMAP:
-                    playerCommands.gamePlayShowmap();
+                    playerCommands.gamePlayShowMap();
                     break;
 
                 case Commands.MAP_COMMAND_REINFORCE:
@@ -471,7 +471,7 @@ public class CommandParser {
             switch (commandType) {
 
                 case Commands.MAP_COMMAND_SHOWMAP:
-                    playerCommands.gamePlayShowmap();
+                    playerCommands.gamePlayShowMap();
                     break;
 
                 case Commands.MAP_COMMAND_FORTIFY:
