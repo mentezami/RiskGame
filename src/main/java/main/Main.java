@@ -4,12 +4,18 @@ import java.util.Scanner;
 import commandparser.CommandParser;
 import config.GameState;
 
+/**
+ * This is the Main Class to call all methods and classes.
+ *
+ * @author Mahmoudreza
+ * @version 0.0.1
+ */
 public class Main {
 
     static GameState gameState;
 
     /**
-     * Get game phase
+     * Get game phase.
      *
      * @return gameState
      */
