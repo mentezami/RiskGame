@@ -17,6 +17,8 @@ public class Hmap {
     private HashMap<String, Continent> continentMap;
     private HashMap<String, Integer> countriesIdxMap;
     private HashMap<String, String> filesAttribute;
+    private Map<String, Country> countryMap;
+    private ArrayList<Country> countries;
 
     /**
      * This is the default constructor of Hmap class.
@@ -27,6 +29,8 @@ public class Hmap {
         continents = new ArrayList <Continent>();
         continentMap = new HashMap <String,Continent>();
         countriesIdxMap = new HashMap <String,Integer>();
+        countries = new ArrayList <Country>();
+        countryMap = new TreeMap<String, Country>(String.CASE_INSENSITIVE_ORDER);
     }
 
     /**
@@ -60,6 +64,24 @@ public class Hmap {
     }
 
     /**
+     * Setter method for the country hash-map.
+     *
+     * @param countryMap hash-map of country
+     */
+    public void setCountryMap(Map<String, Country> countryMap) {
+        this.countryMap = countryMap;
+    }
+
+    /**
+     * Get method for country hash-map.
+     *
+     * @return map of countries
+     */
+    public Map<String, Country> getCountryMap() {
+        return countryMap;
+    }
+
+    /**
      * It returns list of continents.
      *
      * @return continents
@@ -75,6 +97,22 @@ public class Hmap {
      */
     public void setContinents(List <Continent> continents) {
         this.continents = continents;
+    }
+
+    /**
+     * It returns list of countries.
+     * @return countries
+     */
+    public ArrayList <Country> getCountries() {
+        return countries;
+    }
+
+    /**
+     * This sets the countries.
+     * @param countries list of countries
+     */
+    public void setCountries(ArrayList <Country> countries) {
+        this.countries = countries;
     }
 
     /**
