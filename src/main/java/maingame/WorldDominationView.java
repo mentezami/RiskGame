@@ -1,0 +1,62 @@
+package maingame;
+
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Set;
+
+import controller.GameController;
+import entity.Continent;
+import entity.Country;
+import entity.Hmap;
+import entity.Player;
+
+public class WorldDominationView implements Observer {
+
+    /**
+     * This method Update Observable and Argument
+     * @param o Observable object
+     * @param arg an object of Object
+     * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+     */
+    @Override
+    public void update(Observable o, Object arg) {
+
+        String methodValue = (String) arg;
+        GameController gameController = (GameController) o;
+        Hmap map = gameController.getMap();
+
+        if (methodValue.equals("show-world-domination")) {
+
+            System.out.println("++++++++ World Domination View ++++++++");
+
+            for (Player p: gameController.getPlayerModel().getPlayersList()) {
+
+                System.out.println("+++++++++++++++++++++++++++");
+
+                double mapPercent = ((float)p.getAssignedCountry().size() / (float)map.getCountries().size()) * 100;
+
+                mapPercent = Math.round(mapPercent * 100.0) / 100.0;
+                System.out.println("Player: " + p.getName() + " has " + mapPercent + "% of map");
+                System.out.println("Player: " + p.getName() + " has continents = " +
+                        gameController.getPlayerModel().getContinentOwnedByPlayer(p));
+                System.out.println("Player: " + p.getName() + " has current armies = " + p.getArmies());
+
+                int armiesOnMap = 0;
+
+                for (Country c: p.getAssignedCountry()) {
+                    armiesOnMap += c.getArmy();
+                }
+
+                System.out.println("Player: " + p.getName() + " has armies on map = " + armiesOnMap);
+            }
+
+            System.out.println("+++++++++++++++++++++++++++");
+        }
+    }
+}
+
+
+
