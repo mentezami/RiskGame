@@ -7,6 +7,12 @@ import entity.Country;
 import entity.Hmap;
 import exception.InvalidMap;
 
+/**
+ * This Class for checking Map Commands.
+ *
+ * @author Mahmoudreza
+ * @version 0.0.1
+ */
 public class MapController {
 
     private static int countryIdx = 1;
