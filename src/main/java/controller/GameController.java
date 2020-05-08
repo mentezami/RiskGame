@@ -3,16 +3,10 @@ package controller;
 import java.util.Observable;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.Stack;
 import config.Commands;
 import entity.Card;
-import entity.Continent;
-import entity.Country;
 import entity.Hmap;
 import entity.Player;
 import exception.InvalidMap;
@@ -22,7 +16,6 @@ import mapparser.MapVerifier;
 import mapparser.MapWriter;
 import models.CardModel;
 import models.PlayerModel;
-import static java.lang.System.exit;
 
 /**
  * This class reads, parses the command line string from user input.
@@ -376,7 +369,7 @@ public class GameController extends Observable {
                 if (playerModel.assignArmiesToAllPlayers()) {
 
                     playerModel.populateCountries(getMap());
-                    playerModel.intitializeArmiesForAllCountries(getMap());
+                    playerModel.initializeArmiesForAllCountries(getMap());
 
                     for (Player p : playerModel.getPlayersList()) {
                         int countryCount = p.getAssignedCountry().size();

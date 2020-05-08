@@ -3,16 +3,16 @@ package models;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Stack;
 
 import entity.CardType;
+import config.Commands;
+import controller.GameController;
 import entity.Card;
 import entity.Country;
 import entity.Hmap;
 import entity.Player;
-
-import commandparser.CommandParser;
-
 
 public class CardModel {
 
