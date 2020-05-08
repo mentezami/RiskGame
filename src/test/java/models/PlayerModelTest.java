@@ -1,6 +1,7 @@
 package models;
 
 import static org.junit.Assert.*;
+import entity.Continent;
 import org.junit.*;
 import entity.Country;
 import entity.Player;
@@ -8,7 +9,7 @@ import entity.Player;
 public class PlayerModelTest {
 
     Player player;
-    PlayerModel playerCmd;
+    PlayerModel playerModel;
 
     /**
      * This method executed before all the methods of the class.
@@ -24,7 +25,7 @@ public class PlayerModelTest {
     @Before
     public void beforeTest() {
         player = new Player(4, "TestPlayer");
-        playerCmd = new PlayerModel();
+        playerModel = new PlayerModel();
     }
 
     /**
@@ -41,23 +42,32 @@ public class PlayerModelTest {
     @Test
     public void testThreeReinforceArmiesForPLayer() {
 
-        for (int idx = 0; idx < 8; idx++)
-            player.getAssignedCountry().add(new Country());
+        for (int idx = 0; idx < 8; idx++) {
+            Country c1 = new Country();
+            Continent con1 = new Continent();
+            c1.setBelongToContinent(con1);
+            player.getAssignedCountry().add(c1);
+        }
 
-        int armies = playerCmd.countReinforcementArmies(player);
-        assertEquals(5, armies);
+        int armies = playerModel.countReinforcementArmies(player);
+
+        assertEquals(3, armies);
     }
 
     /**
      * This method tests more than 3 reinforce armies
      */
-    @Ignore
+    @Test
     public void testReinforceArmiesCountForPLayer() {
 
-        for (int idx = 0; idx < 25; idx++)
-            player.getAssignedCountry().add(new Country());
+        for (int idx = 0; idx < 25; idx++) {
+            Country c1 = new Country();
+            Continent con1 = new Continent();
+            c1.setBelongToContinent(con1);
+            player.getAssignedCountry().add(c1);
+        }
 
-        int armies = playerCmd.countReinforcementArmies(player);
+        int armies = playerModel.countReinforcementArmies(player);
         assertEquals(8, armies);
     }
 }

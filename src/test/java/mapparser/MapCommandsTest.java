@@ -7,6 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.Ignore;
+import controller.MapController;
 import entity.Continent;
 import entity.Country;
 import entity.Hmap;
@@ -16,11 +17,11 @@ import exception.InvalidMap;
  * This is a Test Class for testing MapCommands
  *
  * @author Mahmoudreza
- * @version 0.0.1
+ * @version 0.0.2
  */
 public class MapCommandsTest {
 
-    MapCommands mapCommands;
+    MapController mapController;
     static Continent continent;
     static Hmap map;
     String nameContinent = "USA";
@@ -71,7 +72,7 @@ public class MapCommandsTest {
      */
     @Test
     public void removeContinentTest() {
-        assertEquals(true, mapCommands.removeContinent(map, nameContinent));
+        assertEquals(true, mapController.removeContinent(map, nameContinent));
         System.out.println("This is a test for Remove Continent");
     }
 
@@ -81,8 +82,8 @@ public class MapCommandsTest {
      */
     @Test
     public void addContinentTest() {
-        assertEquals(true, mapCommands.addContinent(map, nameContinent, String.valueOf(controlValue), color));
-        boolean output = mapCommands.addContinent(map, nameContinent, String.valueOf(controlValue), color);
+        assertEquals(true, mapController.addContinent(map, nameContinent, String.valueOf(controlValue), color));
+        boolean output = mapController.addContinent(map, nameContinent, String.valueOf(controlValue), color);
         assertNotNull(output);
         System.out.println("This is a test for Add Continent it was pass");
     }
@@ -103,7 +104,7 @@ public class MapCommandsTest {
      */
     @Test
     public void addCountryTest() {
-        boolean output = MapCommands.addCountry(map, nameCountry, nameContinent);
+        boolean output = MapController.addCountry(map, nameCountry, nameContinent);
         assertNotNull(output);
         System.out.println("This is a test for AddCountry Continent");
     }
@@ -124,14 +125,14 @@ public class MapCommandsTest {
      */
     @Test
     public void mapCountryToContinentTest() {
-        assertNotNull(mapCommands.mapCountryToContinent(continent, country));
+        assertNotNull(mapController.mapCountryToContinent(continent, country));
         System.out.println("This is a test for mapCountry to Continent");
     }
 
     @Ignore
     public void shouldNotBeRunThisTime() throws InvalidMap {
-        continent = mapCommands.updateContinent(continent, map, nameContinent, String.valueOf(7));
-        mapCommands.updateContinent(continent, map, nameContinent, String.valueOf(controlValue));
+        continent = mapController.updateContinent(continent, map, nameContinent, String.valueOf(7));
+        mapController.updateContinent(continent, map, nameContinent, String.valueOf(controlValue));
         assertEquals(continent.getValue(), controlValue);
         assertEquals(continent.getValue(), controlValue);
         assertEquals(continent.getName(), nameContinent);

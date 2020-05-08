@@ -297,7 +297,7 @@ public class PlayerModel {
      * This method initialize armies for all the countries
      * @param map main map It will put one army on every country
      */
-    public void intitializeArmiesForAllCountries(Hmap map) {
+    public void initializeArmiesForAllCountries(Hmap map) {
 
         for (Continent cont : map.getContinents()) {
             for (Country c : cont.getCountries()) {
@@ -345,8 +345,8 @@ public class PlayerModel {
     public void assignReinforceArmiesToPlayers() {
 
         for (Player p : getPlayersList()) {
-            int reinforeArmies = countReinforcementArmies(p);
-            p.setArmies(reinforeArmies);
+            int reinforceArmies = countReinforcementArmies(p);
+            p.setArmies(reinforceArmies);
         }
     }
 

@@ -6,6 +6,12 @@ import java.util.Scanner;
 import config.GameState;
 import controller.GameController;
 
+/**
+ * This is the Main Class to call all methods and classes.
+ *
+ * @author Mahmoudreza
+ * @version 0.0.1
+ */
 public class Main implements Observer {
 
     static GameState gamePhase;
@@ -13,6 +19,7 @@ public class Main implements Observer {
 
     /**
      * Get game phase
+     *
      * @return gameState
      */
     public static GameState getGamePhase() {
@@ -21,6 +28,7 @@ public class Main implements Observer {
 
     /**
      * Setter method for the game state.
+     *
      * @param gameState current phase
      */
     public static void setGamePhase(GameState gameState) {
