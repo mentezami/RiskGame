@@ -13,6 +13,17 @@ import entity.Country;
 import entity.Hmap;
 import entity.Player;
 
+/**
+ * This class controls the behavior of the World Domination View
+ * <ul>
+ * <li>the percentage of the map controlled by every player </li>
+ * <li>the continents controlled by every player</li>
+ * <li>the total number of armies owned by every player.</li>
+ * </ul>
+ *
+ * @author Mahmoudreza
+ * @version 0.0.1
+ */
 public class WorldDominationView implements Observer {
 
     /**
