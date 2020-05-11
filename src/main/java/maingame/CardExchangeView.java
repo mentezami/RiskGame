@@ -9,6 +9,14 @@ import config.Commands;
 import controller.GameController;
 import entity.Card;
 
+/**
+ * This class controls the behavior of the Card Exchange View. It will display
+ * all the cards owned by the current player, then allow the player to select
+ * some cards to exchange.
+ *
+ * @author Mahmoudreza
+ * @version 0.0.1
+ */
 public class CardExchangeView implements Observer{
 
     /*
