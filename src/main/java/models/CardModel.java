@@ -3,17 +3,19 @@ package models;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Stack;
-
 import entity.CardType;
-import config.Commands;
-import controller.GameController;
 import entity.Card;
 import entity.Country;
 import entity.Hmap;
 import entity.Player;
 
+/**
+ * This class is handles the behavior of the card.
+ *
+ * @author Mahmoudreza
+ * @version 0.0.1
+ */
 public class CardModel {
 
     private List<Card> cardForExchange;
@@ -24,6 +26,7 @@ public class CardModel {
         return cardExchanged;
     }
     private static int cardExchanged = 5;
+
     /**
      * Gets the cards to be exchanged.
      *
@@ -43,10 +46,10 @@ public class CardModel {
     }
 
     /**
-     * Allocate cards to country
+     * Allocate cards to country.
+     *
      * @param map current Hashmap object
      * @param stackOfCards stack of cards
-     *
      */
     public void allocateCardsToCountry(Hmap map, Stack<Card> stackOfCards) {
 
@@ -78,11 +81,11 @@ public class CardModel {
     }
 
     /**
-     * exchange of cards between players
+     * exchange of cards between players.
+     *
      * @param player current Player object
      * @param cardlist list of cards
      * @param cardStack current stack of cards
-     *
      */
     public void exchangeCards(Player player, List<Card> cardlist, Stack<Card> cardStack) {
 
@@ -114,9 +117,9 @@ public class CardModel {
 
     /**
      * validates card for exchange
+     *
      * @param cardlist list of cards
      * @return true if cards are valid for exchange, false otherwise
-     *
      */
     public boolean areCardsvalidForExchange(List<Card> cardlist) {
 
