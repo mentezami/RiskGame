@@ -6,14 +6,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * This class is handles the dice.
+ *
+ * @author Mahmoudreza
+ * @version 0.0.1
+ */
 public class DiceModel {
 
     public int numberOfDiceUsedByAttacker;
     public int numberOfDiceUsedByDefender;
-
     public Country attackingCountry;
     public Country defendingCountry;
-
     public List<Integer> attackerDiceValues;
     public List<Integer> defenderDiceValues;
 
@@ -29,7 +33,8 @@ public class DiceModel {
     }
 
     /**
-     * This roll the Dices of attacker and defender
+     * This roll the Dices of attacker and defender.
+     * 
      */
     public void rolldice() {
 
