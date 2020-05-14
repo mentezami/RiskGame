@@ -5,8 +5,13 @@ import config.Commands;
 import entity.*;
 import config.Config;
 
+/**
+ * This class handles the behaviour of player.
+ *
+ * @author Mahmoudreza
+ * @version 0.0.1
+ */
 public class PlayerModel {
-
 
     private ArrayList<Player> playersList;
     private static int[] numOfArmies = {Config.CONFIG_ARMIES_TWO_PLAYER, Config.CONFIG_ARMIES_THREE_PLAYER,
@@ -14,13 +19,14 @@ public class PlayerModel {
 
     /**
      * This is the default constructor of Player Model.
+     *
      */
     public PlayerModel() {
         this.playersList = new ArrayList<Player>();
     }
 
     /**
-     * Get players list
+     * Get players list.
      *
      * @return list of players
      */
@@ -114,6 +120,7 @@ public class PlayerModel {
 
     /**
      * This method places all armies.
+     *
      */
     public void placeAll() {
 
@@ -294,7 +301,8 @@ public class PlayerModel {
     }
 
     /**
-     * This method initialize armies for all the countries
+     * This method initialize armies for all the countries.
+     *
      * @param map main map It will put one army on every country
      */
     public void initializeArmiesForAllCountries(Hmap map) {
@@ -340,7 +348,8 @@ public class PlayerModel {
     }
 
     /**
-     * This will assign armies to all players in Reinforcement
+     * This will assign armies to all players in Reinforcement.
+     *
      */
     public void assignReinforceArmiesToPlayers() {
 
@@ -586,7 +595,7 @@ public class PlayerModel {
     }
 
     /**
-     * This method is to implement attackmove command
+     * This method implements attackMove command
      *
      * @param attackCountry name of the attacker country name
      * @param defendCountry name of the defender country name
@@ -774,6 +783,7 @@ public class PlayerModel {
 
     /**
      * This method check for possibility of attack
+     *
      * @param currentPlayer Current Player name
      * @return true if attack is possible, false otherwise
      */
