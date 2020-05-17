@@ -6,6 +6,12 @@ import org.junit.*;
 import entity.Country;
 import entity.Player;
 
+/**
+ * This is the test class for PlayerCommands
+ *
+ * @author Mahmoudreza
+ * @version 0.0.1
+ */
 public class PlayerModelTest {
 
     Player player;
@@ -13,6 +19,7 @@ public class PlayerModelTest {
 
     /**
      * This method executed before all the methods of the class.
+     *
      */
     @BeforeClass
     public static void beforeAllTesting() {
@@ -21,6 +28,7 @@ public class PlayerModelTest {
 
     /**
      * This method is executed before every method of the class.
+     *
      */
     @Before
     public void beforeTest() {
@@ -29,7 +37,8 @@ public class PlayerModelTest {
     }
 
     /**
-     * This method runs After All Testing
+     * This method runs After All Testing.
+     *
      */
     @AfterClass
     public static void afterPerformingTests() {
@@ -37,7 +46,8 @@ public class PlayerModelTest {
     }
 
     /**
-     * This method tests 3 reinforce armies
+     * This method tests 3 reinforce armies.
+     *
      */
     @Test
     public void testThreeReinforceArmiesForPLayer() {
@@ -55,7 +65,8 @@ public class PlayerModelTest {
     }
 
     /**
-     * This method tests more than 3 reinforce armies
+     * This method tests more than 3 reinforce armies.
+     *
      */
     @Test
     public void testReinforceArmiesCountForPLayer() {
