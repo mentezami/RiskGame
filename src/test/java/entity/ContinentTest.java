@@ -7,26 +7,32 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * This is a Test Class for testing card
+ * This is a test class for testing the methods in  the Continent class
  *
  * @author Mahmoudreza
- * @version 0.0.1
+ * @version 0.0.2
  */
 public class ContinentTest {
 
-    Continent continent = null;
+    static Continent continent;
+
+    String firstColor = "Red";
+    String secondColor = "Blue";
+
+    String firstContinent = "South Pole";
+    String secondContinent = "North Pole";
 
     /**
-     * This method runs before all test methods only one times
+     * This method runs before all test methods.
      *
      */
     @BeforeClass
     public static void beforeAllTesting() {
-        System.out.println("This is before testing");
+        System.out.println("The test methods are started \n");
     }
 
     /**
-     * This Method runs before test methods
+     * This method runs before each test method to initialize the objects.
      *
      */
     @Before
@@ -35,36 +41,40 @@ public class ContinentTest {
     }
 
     /**
-     * This method run after all test methods only one time.
+     * This method runs after all methods.
      *
      */
     @AfterClass
     public static void afterPerformingTests() {
-        System.out.println("The test is done");
+        System.out.println("The tests are done");
     }
 
     /**
-     * This method test get color continent.
+     * This method tests getColor method for continent.
      *
      */
     @Test
-    public void testGetColor() {
+    public void getColorTest() {
         assertNull(continent.getColor());
-        System.out.println("'assertNull' test for getColor method is passed");
-        assertNotEquals("Red", continent.getColor());
-        System.out.println("'assertNotEqual' test for getColor method is passed");
+        System.out.println("\"assertNull\" to test getColor method is passed");
+
+        continent.setColor(secondColor);
+        assertNotEquals(firstColor, continent.getColor());
+        System.out.println("\"assertNotEqual\" to test getColor method is passed \n");
     }
 
     /**
-     * This method test get name continent.
+     * This method tests getName method for continent.
      *
      */
     @Test
-    public void testGetName() {
+    public void getNameTest() {
         assertNull(continent.getName());
-        System.out.println("'assertNull' test for getName method is passed");
-        assertNotEquals("Advance Programming", continent.getName());
-        System.out.println("'assertNotEqual' test for getName method is passed");
+        System.out.println("\"assertNull\" to test getName method is passed");
+
+        continent.setName(secondContinent);
+        assertNotEquals(continent.getName(), firstContinent);
+        System.out.println("\"assertNotEqual\" to test getName method is passed \n");
     }
 
 }
