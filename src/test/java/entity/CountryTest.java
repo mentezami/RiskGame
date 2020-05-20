@@ -7,69 +7,88 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * This is a Test Class for testing card
+ * This is a test class for testing the methods in  the Country class.
  *
  * @author Mahmoudreza
- * @version 0.0.1
+ * @version 0.0.2
  */
 public class CountryTest {
 
     Country country;
+    Player player;
+    int playerId = 1;
+    String playerName = "Mahmoudreza";
+
 
     /**
-     * This method runs before all test methods only one times.
+     * This method runs before all test methods.
      *
      */
     @BeforeClass
     public static void beforeAllTesting() {
-        System.out.println("This is for testing Country Class");
+        System.out.println("The test methods are started \n");
     }
 
     /**
-     * This Method runs before test methods.
+     * This method runs before each test method to initialize the objects.
      *
      */
     @Before
-    public void beforeTest() {
+    public void beforeEachTest() {
         country = new Country();
+        player = new Player(playerId, playerName);
     }
 
     /**
-     * This method run after all test methods only one time.
+     * This method runs after all methods.
      *
      */
     @AfterClass
-    public static void afterPerformingTests() {
+    public static void afterAllTesting() {
         System.out.println("The test is done");
     }
 
     /**
-     * This method test get army in country.
+     * This method tests getArmy method for country.
      *
      */
     @Test
-    public void testGetArmy() {
-        assertEquals(0, country.getArmy());
-        System.out.println("'assertEquals' test for getArmy method is passed");
+    public void getArmyTest() {
+        int numberOfArmy = 3192;
+        country.setArmy(numberOfArmy);
+        assertNotEquals(2300, country.getArmy());
+        System.out.println("\"assertNotEquals\" to test getArmy method is passed");
 
-        assertTrue(country.getArmy() == 0);
-        System.out.println("'assertTrue' test for getArmy method is passed");
+        assertTrue(country.getArmy() == numberOfArmy);
+        System.out.println("\"assertTrue\" to test getArmy method is passed");
 
-        assertNotEquals(6000, country.getArmy());
-        System.out.println("'assertNotEquals' test for getArmy method is passed");
+        assertEquals(numberOfArmy, country.getArmy());
+        System.out.println("\"assertEquals\" to test getArmy method is passed");
     }
 
     /**
-     * This method test get player in country.
+     * This method tests getPlayer method for country.
      *
      */
     @Test
-    public void testGetPlayer() {
-        assertNull(country.getPlayer());
-        System.out.println("'assertNull' test for getPlayer method is passed");
-        assertNotEquals("Name of the Player", country.getPlayer());
-        System.out.println("'assertNotEqual' test for getPlayer method is passed");
+    public void getPlayerTest() {
+        country.setPlayer(player);
+        assertNotNull(country.getPlayer());
+        System.out.println("\"assertNull\" to test getPlayer method is passed");
+
+        assertEquals(player, country.getPlayer());
+        System.out.println("\"assertNotEqual\" to test getPlayer method is passed");
     }
 
+    /**
+     * This method tests getxCoordinate method for country.
+     *
+     */
+    @Test
+    public void getxCoordinateTest() {
+        int xCoordinate = 2;
+        country.setxCoordinate(xCoordinate);
+        assertEquals(country.getxCoordinate(), xCoordinate);
+        System.out.println("\"assertEqual\" to test getxCoordinate method is passed");
+    }
 }
-
