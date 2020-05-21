@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * This is a test class for testing the methods in  the Continent class
+ * This is a test class for testing the methods in  the Continent class.
  *
  * @author Mahmoudreza
  * @version 0.0.2
@@ -36,7 +36,7 @@ public class ContinentTest {
      *
      */
     @Before
-    public void beforeTest() {
+    public void beforeEachTest() {
         continent = new Continent();
     }
 
@@ -45,7 +45,7 @@ public class ContinentTest {
      *
      */
     @AfterClass
-    public static void afterPerformingTests() {
+    public static void afterAllTesting() {
         System.out.println("The tests are done");
     }
 
@@ -55,8 +55,9 @@ public class ContinentTest {
      */
     @Test
     public void getColorTest() {
-        assertNull(continent.getColor());
-        System.out.println("\"assertNull\" to test getColor method is passed");
+        continent.setColor(firstColor);
+        assertNotNull(continent.getColor());
+        System.out.println("\"assertNotNull\" to test getColor method is passed");
 
         continent.setColor(secondColor);
         assertNotEquals(firstColor, continent.getColor());
@@ -69,14 +70,14 @@ public class ContinentTest {
      */
     @Test
     public void getNameTest() {
-        assertNull(continent.getName());
-        System.out.println("\"assertNull\" to test getName method is passed");
+        continent.setName(firstContinent);
+        assertNotNull(continent.getName());
+        System.out.println("\"assertNotNull\" to test getName method is passed");
 
         continent.setName(secondContinent);
         assertNotEquals(continent.getName(), firstContinent);
         System.out.println("\"assertNotEqual\" to test getName method is passed \n");
     }
-
 }
 
 
