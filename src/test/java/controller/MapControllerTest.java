@@ -1,11 +1,8 @@
 package controller;
 
 import static org.junit.Assert.*;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.AfterClass;
@@ -16,16 +13,15 @@ import entity.Hmap;
 import exception.InvalidMap;
 
 /**
- * This is a Test Class for testing MapCommands
+ * This is a test class for testing the methods in the MapController class.
  *
  * @author Mahmoudreza
- * @version 0.0.2
+ * @version 0.0.1
  */
 public class MapControllerTest {
 
     MapController mapController;
     static Continent continent;
-    static Country country;
     static Country firstCountry;
     static Country secondCountry;
     static Hmap map;
@@ -34,81 +30,85 @@ public class MapControllerTest {
     String firstCountryName = "Canada";
     String secondCountryName = "USA";
     String color;
-    int controlValue;
-    static Country adjacentCountry;
-    static HashMap<String, String> mapData;
 
     /**
-     * This method prepares all needs before All Testing Methods and it just runs one.
+     * This method runs before all test methods.
      *
      */
     @BeforeClass
-    public static void initializingForTest() {
-        System.out.println("Preparing for testing MapCommands_Class");
-        map = new Hmap();
-        mapData = new HashMap<>();
-        continent = new Continent();
-        country = new Country();
-        firstCountry = new Country();
-        secondCountry = new Country();
-        adjacentCountry = new Country();
+    public static void beforeAllTesting() {
+        System.out.println("The test methods are started \n");
     }
 
     /**
-     * This method runs before All test cases and runs before every test case.
+     * This method runs before each test method to initialize the objects.
      *
      */
     @Before
-    public void beforeTesting() {
-        mapData = new HashMap<>();
-        map.setMapData(mapData);
+    public void beforeEachTest() {
+        map = new Hmap();
+        continent = new Continent();
+        firstCountry = new Country();
+        secondCountry = new Country();
     }
 
     /**
-     * This method runs After All Testing.
+     * This method runs after all methods.
      *
      */
     @AfterClass
-    public static void afterPerformingTests() {
-        System.out.println("All tests are done");
+    public static void afterAllTesting() {
+        System.out.println("The tests are done");
     }
 
     /**
-     * This method tests the remove Continent.
+     * This method tests removeContinent method for MapController class.
      *
      */
     @Test
     public void removeContinentTest() {
+        //run this to add a continent
+        mapController.addContinent(map, continentName, String.valueOf(continentValue), color);
+
         assertEquals(true, mapController.removeContinent(map, continentName));
-        System.out.println("This is a test for Remove Continent");
+        System.out.println("\"assertEquals\" is passed to test removeContinent method. \n");
     }
 
     /**
-     * This method tests the add Continent.
+     * This method tests the addContinent method for MapController class.
      *
      */
     @Test
     public void addContinentTest() {
-        assertEquals(true, mapController.addContinent(map, continentName, String.valueOf(controlValue), color));
-        boolean output = mapController.addContinent(map, continentName, String.valueOf(controlValue), color);
-        assertNotNull(output);
-        System.out.println("This is a test for Add Continent it was pass");
+        assertEquals(true, mapController.addContinent(map, continentName,
+                String.valueOf(continentValue), color));
+        System.out.println("\"assertEquals\" is passed to test addContinent method. \n");
     }
 
     /**
-     * This method tests the add country.
+     * This method tests the addCountry method for MapController class.
      *
      */
     @Test
     public void addCountryTest() {
-        boolean output = mapController.addCountry(map, firstCountryName, continentName);
-        System.out.println(mapController.addCountry(map, firstCountryName, continentName));
-        assertNotNull(output);
-        System.out.println("This is a test for AddCountry Continent");
+        firstCountry.setName(firstCountryName);
+        List<Country> countryList = new ArrayList<>();
+        countryList.add(firstCountry);
+        continent = new Continent(continentName,continentValue);
+        continent.setCountries(countryList);
+        List<Continent> continentList = new ArrayList<>();
+        continentList.add(continent);
+        map.setContinents(continentList);
+
+        assertFalse(mapController.addCountry(map, firstCountryName, continentName));
+        System.out.println("\"assertFalse\" is passed to test addCountry method. \n");
+
+        assertTrue(mapController.addCountry(map, secondCountryName, continentName));
+        System.out.println("\"assertTrue\" is passed to test addCountry method. \n");
     }
 
     /**
-     * This method tests map country to continent.
+     * This method tests mapCountryToContinent method for MapController class.
      *
      */
     @Test
@@ -116,11 +116,11 @@ public class MapControllerTest {
         firstCountry.setName(firstCountryName);
         assertNotNull(mapController.mapCountryToContinent(new Continent(continentName,continentValue),
                 firstCountry));
-        System.out.println("\"assertNotNull\" is passed to test mapCountryToContinent. \n");
+        System.out.println("\"assertNotNull\" is passed to test mapCountryToContinent method. \n");
     }
 
     /**
-     * This method tests the update Continent name and Continent value.
+     * This method tests the updateContinent name and value for MapController class.
      *
      */
     @Test
@@ -143,6 +143,5 @@ public class MapControllerTest {
         System.out.println("\"assertEquals\" to test for both getName and getValue methods are passed" +
                 " to validate the result of updateContinent method. \n");
     }
-
 }
 
