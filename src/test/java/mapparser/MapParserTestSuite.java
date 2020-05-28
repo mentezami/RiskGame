@@ -11,6 +11,6 @@ import org.junit.runners.Suite.SuiteClasses;
  * @version 0.0.1
  */
 @RunWith(Suite.class)
-@SuiteClasses({MapReaderTest.class, MapCommandsTest.class, MapVerifierTest.class})
+@SuiteClasses({MapReaderTest.class, MapVerifierTest.class})
 public class MapParserTestSuite {
 }
