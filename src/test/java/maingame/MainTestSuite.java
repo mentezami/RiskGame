@@ -1,6 +1,7 @@
 package maingame;
 
-import models.PlayerModelTestSuite;
+import controller.ControllerTestSuite;
+import models.ModelsTestSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -14,6 +15,6 @@ import mapparser.MapParserTestSuite;
  * @version 0.0.2
  */
 @RunWith(Suite.class)
-@SuiteClasses({ EntityTestSuite.class, MapParserTestSuite.class, PlayerModelTestSuite.class })
+@SuiteClasses({ ControllerTestSuite.class, EntityTestSuite.class, MapParserTestSuite.class, ModelsTestSuite.class })
 public class MainTestSuite {
 }
