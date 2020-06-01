@@ -4,9 +4,8 @@ import entity.Continent;
 import org.junit.*;
 import entity.Country;
 import entity.Player;
-
 import java.util.ArrayList;
-
+import java.util.Random;
 import static org.junit.Assert.*;
 
 /**
@@ -28,7 +27,7 @@ public class PlayerModelTest {
      */
     @BeforeClass
     public static void beforeAllTesting() {
-        System.out.println("The test methods are started \n");
+        System.out.println("The test methods are started. \n");
     }
 
     /**
@@ -49,7 +48,7 @@ public class PlayerModelTest {
      */
     @AfterClass
     public static void afterAllTesting() {
-        System.out.println("The tests are done");
+        System.out.println("The tests are done.");
     }
 
     /**
@@ -62,11 +61,11 @@ public class PlayerModelTest {
         assertTrue(playerModel.getPlayersList().isEmpty());
         System.out.println("\"assertTrue\" is passed to test whether playerList is empty. \n");
 
-        //store players to the playerList
+        //store players to the playerList.
         playerList.add(playerOne);
         playerList.add(playerTwo);
 
-        //run this to set playerList
+        //run this to set playerList.
         playerModel.setPlayersList(playerList);
 
         assertFalse(playerModel.getPlayersList().isEmpty());
@@ -84,7 +83,7 @@ public class PlayerModelTest {
         assertTrue(playerList.isEmpty());
         System.out.println("\"assertTrue\" is passed to test whether playerList is empty. \n");
 
-        //store players to the playerList
+        //store players to the playerList.
         playerList.add(playerOne);
         playerList.add(playerTwo);
 
@@ -98,13 +97,114 @@ public class PlayerModelTest {
         System.out.println("\"assertEquals\" is passed to test size of playerList for removePlayer" +
                 " which should be equal or greater than 2 to run removePlayer method. \n");
 
-        //run this to remove a player
+        //run this to remove a player.
         playerModel.removePlayer("Player Two");
 
-        //check the playerList size is decreased
+        //check the playerList size is decreased.
         assertEquals(playerList.size(), 1);
         System.out.println("\"assertEquals\" is passed to test size of playerList for removePlayer" +
                 " which should be decreased after running the removePlayer method. \n");
+    }
+
+    /**
+     * This method tests createPlayer method for PlayerModel class.
+     *
+     */
+    @Test
+    public void createPlayerTest() {
+        //run this to make sure playerList is empty.
+        assertTrue(playerModel.getPlayersList().isEmpty());
+        System.out.println("\"assertTrue\" is passed to test whether playerList is empty. \n");
+
+        //run this to create a player.
+        playerModel.createPlayer("Player Test");
+
+        //check whether size of playerList is updated.
+        assertEquals(playerModel.getPlayersList().size(), 1);
+        System.out.println("\"assertEquals\" is passed to test whether the size of playerList" +
+                " is updated by createPlayer method. \n");
+    }
+
+    /**
+     * This method tests assignArmiesToAllPlayers method for PlayerModel class.
+     *
+     */
+    @Test
+    public void assignArmiesToAllPlayersTest() {
+        //run this to add players to the playerList.
+        playerList.add(playerOne);
+        playerList.add(playerTwo);
+
+        //set playerList.
+        playerModel.setPlayersList(playerList);
+
+        //run this to make sure number of armies for each player is 0.
+        assertEquals(playerOne.getArmies(), 0);
+        assertEquals(playerTwo.getArmies(), 0);
+        System.out.println("\"assertEquals\" is passed to test whether number of armies for each player is 0. \n");
+
+        //run this to assign armies to the players.
+        playerModel.assignArmiesToAllPlayers();
+
+        //run this to make sure number of armies for each player is still 0.
+        assertNotEquals(playerOne.getArmies(), 0);
+        assertNotEquals(playerTwo.getArmies(), 0);
+        System.out.println("\"assertNotEquals\" is passed to test whether the number of armies" +
+                " for each player is updated by assignArmiesToAllPlayers method. \n");
+    }
+
+    /**
+     * This method tests placeAll method for PlayerModel class.
+     *
+     */
+    @Test
+    public void placeAllTest() {
+        //create a country and assign to a player
+        Country country = new Country();
+        country.setName("Canada");
+        playerOne.setAssignedCountry(country);
+
+        //set armies to the player
+        playerOne.setArmies(20);
+
+        //run this to add players to the playerList.
+        playerList.add(playerOne);
+
+        //set playerList.
+        playerModel.setPlayersList(playerList);
+
+        assertEquals(country.getArmy(), 0);
+        System.out.println("\"assertEquals\" is passed to test whether the number of armies" +
+                " for each country is 0. \n");
+
+        assertEquals(playerOne.getArmies(), 20);
+        System.out.println("\"assertEquals\" is passed to test whether the number of armies" +
+                " for each player is set. \n");
+
+        //run this to place all armies from each player to its correspondence country
+        playerModel.placeAll();
+
+        assertEquals(country.getArmy(), 20);
+        System.out.println("\"assertEquals\" is passed to test whether the number of armies" +
+                " for each player's country is updated by placeAll method. \n");
+
+        assertEquals(playerOne.getArmies(), 0);
+        System.out.println("\"assertEquals\" is passed to test whether the number of armies" +
+                " for each player is updated to 0 by placeAll method. \n");
+    }
+
+    /**
+     * This method tests getRandomNumber method for PlayerModel class.
+     *
+     */
+    @Test
+    public void getRandomNumberTest() {
+        //declare a positive random number for passing to the method.
+        Random randomNumber = new Random();
+        int number = randomNumber.nextInt(Integer.MAX_VALUE);
+
+        assertNotNull(playerModel.getRandomNumber(number));
+        System.out.println("\"assertNotNull\" is passed to test getRandomNumber method. \n");
     }
 
     /**

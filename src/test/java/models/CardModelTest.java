@@ -38,7 +38,7 @@ public class CardModelTest {
      */
     @BeforeClass
     public static void beforeAllTesting() {
-        System.out.println("The test methods are started \n");
+        System.out.println("The test methods are started. \n");
     }
 
     /**
@@ -64,7 +64,7 @@ public class CardModelTest {
      */
     @AfterClass
     public static void afterAllTesting() {
-        System.out.println("The tests are done");
+        System.out.println("The tests are done.");
     }
 
     /**
