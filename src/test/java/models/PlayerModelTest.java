@@ -1,11 +1,13 @@
 package models;
 
 import entity.Continent;
+import entity.Hmap;
 import org.junit.*;
 import entity.Country;
 import entity.Player;
-import java.util.ArrayList;
-import java.util.Random;
+
+import java.util.*;
+
 import static org.junit.Assert.*;
 
 /**
@@ -19,6 +21,12 @@ public class PlayerModelTest {
     Player playerOne;
     Player playerTwo;
     PlayerModel playerModel;
+    Hmap hmap;
+    Country firstCountry;
+    Country secondCountry;
+    ArrayList<Country> countryList;
+    Continent continent;
+    List<Continent> continentList;
     ArrayList<Player> playerList;
 
     /**
@@ -39,6 +47,12 @@ public class PlayerModelTest {
         playerOne = new Player(1, "Player One");
         playerTwo = new Player(2, "Player Two");
         playerModel = new PlayerModel();
+        hmap = new Hmap();
+        firstCountry = new Country();
+        secondCountry = new Country();
+        countryList = new ArrayList<>();
+        continent = new Continent();
+        continentList = new ArrayList<>();
         playerList = new ArrayList<>();
     }
 
@@ -68,8 +82,8 @@ public class PlayerModelTest {
         //run this to set playerList.
         playerModel.setPlayersList(playerList);
 
-        assertFalse(playerModel.getPlayersList().isEmpty());
-        System.out.println("\"assertFalse\" is passed to test getPlayersList method" +
+        assertNotEquals(playerModel.getPlayersList().size(), playerModel.getPlayersList().isEmpty());
+        System.out.println("\"assertNotEquals\" is passed to test getPlayersList method" +
                 " and whether playerList is still empty. \n");
     }
 
@@ -110,6 +124,8 @@ public class PlayerModelTest {
      * This method tests createPlayer method for PlayerModel class.
      *
      */
+
+    ////
     @Test
     public void createPlayerTest() {
         //run this to make sure playerList is empty.
@@ -120,9 +136,9 @@ public class PlayerModelTest {
         playerModel.createPlayer("Player Test");
 
         //check whether size of playerList is updated.
-        assertEquals(playerModel.getPlayersList().size(), 1);
-        System.out.println("\"assertEquals\" is passed to test whether the size of playerList" +
-                " is updated by createPlayer method. \n");
+        assertNotEquals(playerModel.getPlayersList().size(), playerModel.getPlayersList().isEmpty());
+        System.out.println("\"assertNotEquals\" is passed to test whether the playerList" +
+                " is still empty or updated by createPlayer method. \n");
     }
 
     /**
@@ -160,9 +176,8 @@ public class PlayerModelTest {
     @Test
     public void placeAllTest() {
         //create a country and assign to a player
-        Country country = new Country();
-        country.setName("Canada");
-        playerOne.setAssignedCountry(country);
+        firstCountry.setName("Canada");
+        playerOne.setAssignedCountry(firstCountry);
 
         //set armies to the player
         playerOne.setArmies(20);
@@ -173,7 +188,7 @@ public class PlayerModelTest {
         //set playerList.
         playerModel.setPlayersList(playerList);
 
-        assertEquals(country.getArmy(), 0);
+        assertEquals(firstCountry.getArmy(), 0);
         System.out.println("\"assertEquals\" is passed to test whether the number of armies" +
                 " for each country is 0. \n");
 
@@ -184,7 +199,7 @@ public class PlayerModelTest {
         //run this to place all armies from each player to its correspondence country
         playerModel.placeAll();
 
-        assertEquals(country.getArmy(), 20);
+        assertEquals(firstCountry.getArmy(), 20);
         System.out.println("\"assertEquals\" is passed to test whether the number of armies" +
                 " for each player's country is updated by placeAll method. \n");
 
@@ -203,8 +218,151 @@ public class PlayerModelTest {
         Random randomNumber = new Random();
         int number = randomNumber.nextInt(Integer.MAX_VALUE);
 
-        assertNotNull(playerModel.getRandomNumber(number));
-        System.out.println("\"assertNotNull\" is passed to test getRandomNumber method. \n");
+        assertNotEquals(PlayerModel.getRandomNumber(number), 0);
+        System.out.println("\"assertNotEquals\" is passed to test getRandomNumber method. \n");
+    }
+
+    /**
+     * This method tests placeArmy method for PlayerModel class.
+     *
+     */
+    @Test
+    public void placeArmyTest() {
+        //first add a country to the map.
+        firstCountry.setName("Canada");
+        Map<String,Country> countryMap = new HashMap<>();
+        countryMap.put("Canada",firstCountry);
+        hmap.setCountryMap(countryMap);
+
+        //assign the added country to a player.
+        playerOne.setAssignedCountry(firstCountry);
+
+        //assign the player to the added country.
+        firstCountry.setPlayer(playerOne);
+
+        //run this to check whether there is no army for the player.
+        assertFalse(playerModel.placeArmy(hmap, playerOne, "Canada"));
+        System.out.println("\"assertFalse\" is passed to test whether there is any player's army" +
+                " for assigning to the country. \n");
+
+        //run this to check whether there is no army for the country.
+        assertEquals(firstCountry.getArmy(), 0);
+        System.out.println("\"assertEquals\" is passed to test there is no army for the country. \n");
+
+        //add some armies to the player
+        playerOne.setArmies(20);
+
+        //run this to check whether the player assigns its armies to the country
+        assertTrue(playerModel.placeArmy(hmap,playerOne,"Canada"));
+        System.out.println("\"assertTrue\" is passed to test placeArmy method. \n");
+
+        //run this to check whether the player's armies are assigned to the country.
+        assertNotEquals(firstCountry.getArmy(), 0);
+        System.out.println("\"assertNotEquals\" is passed to test whether placeArmy method" +
+                " assigns player's armies to the country. \n");
+    }
+
+    /**
+     * This method tests isAllPlayersArmiesExhausted method for PlayerModel class.
+     *
+     */
+    @Test
+    public void isAllPlayersArmiesExhaustedTest() {
+        //run this to check there are no armies for the player.
+        assertTrue(playerModel.isAllPlayersArmiesExhausted());
+        System.out.println("\"assertTrue\" is passed to test whether there are" +
+                " no armies for the player. \n");
+
+        //add some armies to the player.
+        playerOne.setArmies(50);
+        playerList.add(playerOne);
+        playerModel.setPlayersList(playerList);
+
+        //run this to check whether the number of player's armies are still zero or exhausted.
+        assertFalse(playerModel.isAllPlayersArmiesExhausted());
+        System.out.println("\"assertFalse\" is passed to test isAllPlayersArmiesExhausted method and " +
+                "whether the number of armies for each player is exhausted. \n");
+    }
+
+    /**
+     * This method tests populateCountries method for PlayerModel class.
+     *
+     */
+    @Test
+    public void populateCountriesTest() {
+        //first create a player list and add some players ot it.
+        playerList.add(playerOne);
+        playerList.add(playerTwo);
+
+        //set the player list.
+        playerModel.setPlayersList(playerList);
+
+        //add some countries and a continent for creating a map.
+        firstCountry.setName("Canada");
+        secondCountry.setName("USA");
+
+        countryList.add(firstCountry);
+        countryList.add(secondCountry);
+
+        continent = new Continent("North America",1);
+        continent.setCountries(countryList);
+
+        continentList.add(continent);
+
+        hmap.setContinents(continentList);
+
+        //run this to make sure there are no countries assigned to the players.
+        assertTrue(playerOne.getAssignedCountry().isEmpty());
+        assertTrue(playerTwo.getAssignedCountry().isEmpty());
+        System.out.println("\"assertTrue\" is passed to test the no countries" +
+                " assigned to the players. \n");
+
+        //run this to assign the countries to the players.
+        playerModel.populateCountries(hmap);
+
+        assertNotEquals(playerOne.getAssignedCountry().size(), playerOne.getAssignedCountry().isEmpty());
+        assertNotEquals(playerTwo.getAssignedCountry().size(), playerTwo.getAssignedCountry().isEmpty());
+        System.out.println("\"assertNotEquals\" is passed to test the countries" +
+                " assigned to players by populateCountries method. \n");
+    }
+
+    /**
+     * This method tests getCountryListFromMap method for PlayerModel class.
+     *
+     */
+    @Test
+    public void getCountryListFromMapTest() {
+        /*
+        first, create a list to test for comparison of return value of getCountryListFromMap method
+        and the created list to make sure both are empty.
+         */
+        ArrayList<Country> countryListTest = new ArrayList<>();
+
+        //run this to check whether the return value of getCountryListFromMap method equals an empty list.
+        assertEquals(playerModel.getCountryListFromMap(hmap), countryListTest);
+        System.out.println("\"assertEquals\" is passed to test whether getCountryListFromMap" +
+                " is returning empty list by comparing with an empty created list. \n");
+
+        //add countries and continent to the map.
+        firstCountry.setName("Canada");
+        secondCountry.setName("USA");
+
+        countryList.add(firstCountry);
+        countryList.add(secondCountry);
+
+        firstCountry.setAdjacentCountries(countryList);
+        secondCountry.setAdjacentCountries(countryList);
+
+        continent = new Continent("North America",1);
+        continent.setCountries(countryList);
+
+        continentList.add(continent);
+
+        hmap.setContinents(continentList);
+
+        assertNotEquals(playerModel.getCountryListFromMap(hmap),countryListTest);
+        System.out.println("\"assertNotEquals\" is passed to test whether getCountryListFromMap" +
+                " is still returning empty value list by comparing with an empty created list. \n");
     }
 
     /**
