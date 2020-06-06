@@ -563,7 +563,7 @@ public class GameController extends Observable {
 
         switch (words[0]) {
 
-            case Commands.MAP_COMMMAND_ATTACK:
+            case Commands.MAP_COMMAND_ATTACK:
 
                 // Player may decide to attack or not to attack again. If attack not possible, attack automatically ends. 1
 
