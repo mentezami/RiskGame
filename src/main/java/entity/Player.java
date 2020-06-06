@@ -21,6 +21,21 @@ public class Player {
     private List<Card> cardList;
 
     /**
+     * Player parameterized constructor.
+     *
+     * @param id of Player
+     * @param name of Player
+     */
+    public Player(int id, String name) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.assignedCountry = new ArrayList<Country>();
+        this.cardList = new ArrayList<Card>();
+        this.numberOfCardsExchanged = 0;
+    }
+
+    /**
      * get cards of player
      *
      * @return the cardList
@@ -36,21 +51,6 @@ public class Player {
      */
     public void setCardList(List<Card> cardList) {
         this.cardList = cardList;
-    }
-
-    /**
-     * Player parameterized constructor.
-     *
-     * @param id of Player
-     * @param name of Player
-     */
-    public Player(int id, String name) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.assignedCountry = new ArrayList<Country>();
-        this.cardList = new ArrayList<Card>();
-        this.numberOfCardsExchanged = 0;
     }
 
     /**

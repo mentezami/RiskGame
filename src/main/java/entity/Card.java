@@ -1,9 +1,5 @@
 package entity;
 
-import config.Commands;
-import entity.*;
-import config.Config;
-
 /**
  * This is the main class for the card.
  *
@@ -13,19 +9,11 @@ import config.Config;
 public class Card {
 
     CardType cardType;
-
     private Country countryToWhichCardBelong;
 
     /**
-     * This method gets Card Kind.
-     * @return the type of the card
-     */
-    public CardType getCardType() {
-        return cardType;
-    }
-
-    /**
      * Parameterized Constructor for Card
+     *
      * @param cardType reference to get cardType enum
      */
     public Card(CardType cardType){
@@ -33,7 +21,17 @@ public class Card {
     }
 
     /**
+     * This method gets Card Kind.
+     *
+     * @return the type of the card
+     */
+    public CardType getCardType() {
+        return cardType;
+    }
+
+    /**
      * This method sets Cad Type.
+     *
      * @param cardType sets the kind of card
      */
     public void setCardType(CardType cardType) {
@@ -42,6 +40,7 @@ public class Card {
 
     /**
      * This method gets Country names which card belongs.
+     *
      * @return countryToWhichCardBelong
      */
     public Country getCountryToWhichCardBelong() {
@@ -50,6 +49,7 @@ public class Card {
 
     /**
      * This method sets Country names which card belongs.
+     *
      * @param countryToWhichCardBelong country name which card belongs
      */
     public void setCountryToWhichCardBelong(Country countryToWhichCardBelong) {
@@ -61,6 +61,6 @@ public class Card {
      */
     @Override
     public String toString() {
-        return "[cardType = " + cardType + ", CountryofCard = " + countryToWhichCardBelong + "], ";
+        return "[cardType = " + cardType + ", CountryOfCard = " + countryToWhichCardBelong + "], ";
     }
 }
