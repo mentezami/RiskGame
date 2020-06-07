@@ -350,9 +350,6 @@ public class PlayerModelTest {
         countryList.add(firstCountry);
         countryList.add(secondCountry);
 
-        firstCountry.setAdjacentCountries(countryList);
-        secondCountry.setAdjacentCountries(countryList);
-
         continent = new Continent("North America",1);
         continent.setCountries(countryList);
 
@@ -366,39 +363,113 @@ public class PlayerModelTest {
     }
 
     /**
-     * This method tests 3 reinforce armies.
+     * This method tests countReinforcementArmies method for PlayerModel class.
      *
      */
     @Test
-    public void testThreeReinforceArmiesForPLayer() {
+    public void countReinforcementArmiesTest() {
+        //run this to make sure the number of player's armies equals zero.
+        assertEquals(0, playerOne.getArmies());
+        System.out.println("\"assertEquals\" is passed to test whether the number of player's" +
+                " armies equals zero. \n");
 
-        for (int idx = 0; idx < 8; idx++) {
-            Country c1 = new Country();
-            Continent con1 = new Continent();
-            c1.setBelongToContinent(con1);
-            playerOne.getAssignedCountry().add(c1);
-        }
+        //run this to make sure the number of assigned countries to the player is zero.
+        assertEquals(0, playerOne.getAssignedCountry().size());
+        System.out.println("\"assertEquals\" is passed to test whether the number of assigned" +
+                " countries to player is zero. \n");
 
-        int armies = playerModel.countReinforcementArmies(playerOne);
+        //add some armies to the player.
+        playerOne.setArmies(20);
 
-        assertEquals(3, armies);
+        //create and set a country and continent to the map for assigning to the player.
+        firstCountry.setName("Canada");
+
+        countryList.add(firstCountry);
+
+        continent = new Continent("North America",1);
+
+        firstCountry.setBelongToContinent(continent);
+
+        continent.setCountries(countryList);
+
+        //assign both the player to the country and the country to the player.
+        firstCountry.setPlayer(playerOne);
+        playerOne.setAssignedCountry(firstCountry);
+
+        //run this to compare Reinforced Armies with the added armies to the player
+        assertNotEquals(playerOne.getArmies(), playerModel.countReinforcementArmies(playerOne));
+        System.out.println("\"assertNotEquals\" is passed to test countReinforcementArmies method. \n");
     }
 
     /**
-     * This method tests more than 3 reinforce armies.
+     * This method tests initializeArmiesForAllCountries method for PlayerModel class.
      *
      */
     @Test
-    public void testReinforceArmiesCountForPLayer() {
+    public void initializeArmiesForAllCountriesTest() {
+        //first create the map by adding a country and continent, then set a player for the country.
+        firstCountry.setName("Canada");
+        firstCountry.setPlayer(playerOne);
+        countryList.add(firstCountry);
+        continent = new Continent("North America",1);
+        firstCountry.setBelongToContinent(continent);
+        continent.setCountries(countryList);
+        continentList.add(continent);
+        hmap.setContinents(continentList);
 
-        for (int idx = 0; idx < 25; idx++) {
-            Country c1 = new Country();
-            Continent con1 = new Continent();
-            c1.setBelongToContinent(con1);
-            playerOne.getAssignedCountry().add(c1);
-        }
+        //add some armies to the player and country.
+        firstCountry.setArmy(1);
+        playerOne.setArmies(11);
 
-        int armies = playerModel.countReinforcementArmies(playerOne);
-        assertEquals(8, armies);
+        //run this to add army to the country by decreasing from player's army.
+        playerModel.initializeArmiesForAllCountries(hmap);
+
+        assertEquals(2, firstCountry.getArmy());
+        System.out.println("\"assertEquals\" is passed to test whether the number of country's armies" +
+                " is increased and updated by initializeArmiesForAllCountries method. \n");
+
+        assertEquals(10, firstCountry.getPlayer().getArmies());
+        System.out.println("\"assertEquals\" is passed to test whether the number of player's armies" +
+                " is decreased by initializeArmiesForAllCountries method. \n");
+    }
+
+    /**
+     * This method tests reinforceArmiesForCurrentPlayer method for PlayerModel class.
+     *
+     */
+    @Test
+    public void reinforceArmiesForCurrentPlayerTest() {
+        //first declare a country
+        firstCountry.setName("Canada");
+
+        //add some armies and assign the country to the player
+        playerOne.setArmies(10);
+        playerOne.setAssignedCountry(firstCountry);
+
+        assertTrue(playerModel.reinforceArmiesForCurrentPlayer(playerOne, "Canada", 10));
+        System.out.println("\"assertTrue\" is passed to test reinforceArmiesForCurrentPlayer method. \n");
+    }
+
+    /**
+     * This method tests assignReinforceArmiesToPlayers method for PlayerModel class.
+     *
+     */
+    @Test
+    public void assignReinforceArmiesToPlayersTest() {
+        //first run this to check whether the number of player's armies is zero.
+        assertEquals(0, playerOne.getArmies());
+        System.out.println("\"assertEquals\" is passed to test whether the number of player's" +
+                " armies equals zero. \n");
+
+        //add the player to the player list and set the player list.
+        playerList.add(playerOne);
+        playerModel.setPlayersList(playerList);
+
+        //run this to assign armies to the player, the default value to assign is 3 by this method.
+        playerModel.assignReinforceArmiesToPlayers();
+
+        assertEquals(3, playerOne.getArmies());
+        System.out.println("\"assertEquals\" is passed to test whether the number of player's" +
+                " armies is updated by assignReinforceArmiesToPlayers method. \n");
     }
 }
