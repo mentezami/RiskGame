@@ -472,4 +472,135 @@ public class PlayerModelTest {
         System.out.println("\"assertEquals\" is passed to test whether the number of player's" +
                 " armies is updated by assignReinforceArmiesToPlayers method. \n");
     }
+
+    /**
+     * This method tests fortifyCurrentPlayer method for PlayerModel class.
+     *
+     */
+    @Test
+    public void fortifyCurrentPlayerTest() {
+
+        //check number of army for each country.
+        assertEquals(0, firstCountry.getArmy());
+        assertEquals(0, secondCountry.getArmy());
+        System.out.println("\"assertEquals\" is passed to check number of army for each country. \n");
+
+
+        //add countries to the map.
+        Map<String,Country> countryMap = new HashMap<>();
+        countryMap.put("Canada",firstCountry);
+        countryMap.put("USA",secondCountry);
+        hmap.setCountryMap(countryMap);
+
+        //set some armies to the origin country.
+        firstCountry.setArmy(12);
+
+        //set a neighbor for the countries.
+        List<String> neighborCountries = new ArrayList<>();
+        neighborCountries.add("USA");
+        firstCountry.setNeighborCountries(neighborCountries);
+        neighborCountries.add("Canada");
+        secondCountry.setNeighborCountries(neighborCountries);
+
+
+        //assign a player to the added countries.
+        firstCountry.setPlayer(playerOne);
+        secondCountry.setPlayer(playerOne);
+
+        //this methods move the army from origin country to destination country.
+        assertTrue(playerModel.fortifyCurrentPlayer(hmap, playerOne,
+                "Canada", "USA", 10));
+        System.out.println("\"assertTrue\" is passed to fortifyCurrentPlayer method. \n");
+
+
+        assertEquals(2, firstCountry.getArmy());
+        assertEquals(10, secondCountry.getArmy());
+        System.out.println("\"assertEquals\" is passed to test whether the number of army" +
+                " from origin country is moved to destination country by fortifyCurrentPlayer method. \n");
+    }
+
+    /**
+     * This method tests isCountryBelongToPlayer method for PlayerModel class.
+     *
+     */
+    @Test
+    public void isCountryBelongToPlayerTest() {
+        //add a country to the map.
+        Map<String,Country> countryMap = new HashMap<>();
+        countryMap.put("Canada",firstCountry);
+        hmap.setCountryMap(countryMap);
+
+        //assign a player to the added country.
+        firstCountry.setPlayer(playerOne);
+
+        assertTrue(playerModel.isCountryBelongToPlayer(hmap, playerOne, "Canada"));
+        System.out.println("\"assertTrue\" is passed to isCountryBelongToPlayer method. \n");
+    }
+
+    /**
+     * This method tests isCountriesAdjacent method for PlayerModel class.
+     *
+     */
+    @Test
+    public void isCountriesAdjacentTest() {
+        //add countries to the map.
+        Map<String,Country> countryMap = new HashMap<>();
+        countryMap.put("Canada",firstCountry);
+        countryMap.put("USA",secondCountry);
+        hmap.setCountryMap(countryMap);
+
+        //set a neighbor for the countries.
+        List<String> neighborCountries = new ArrayList<>();
+        neighborCountries.add("USA");
+        firstCountry.setNeighborCountries(neighborCountries);
+        neighborCountries.add("Canada");
+        secondCountry.setNeighborCountries(neighborCountries);
+
+        assertTrue(playerModel.isCountriesAdjacent(hmap,"Canada", "USA"));
+        System.out.println("\"assertTrue\" is passed to isCountriesAdjacent method. \n");
+    }
+
+    /**
+     * This method tests getCountryMapFromList method for PlayerModel class.
+     *
+     */
+    @Test
+    public void getCountryMapFromListTest() {
+        //run this to check whether the returned map by getCountryMapFromList method is empty.
+        assertTrue(playerModel.getCountryMapFromList(countryList).isEmpty());
+        System.out.println("\"assertTrue\" is passed to test whether the returned map by" +
+                " getCountryMapFromList method is empty. \n");
+
+        //declare and add countries to a country list.
+        firstCountry.setName("Canada");
+        secondCountry.setName("USA");
+        countryList.add(firstCountry);
+        countryList.add(secondCountry);
+
+        assertFalse(playerModel.getCountryMapFromList(countryList).isEmpty());
+        System.out.println("\"assertFalse\" is passed to test whether the returned map is made" +
+                " by getCountryMapFromList method. \n");
+    }
+
+    /**
+     * This method tests isLastPlayer method for PlayerModel class.
+     *
+     */
+    @Test
+    public void isLastPlayerTest() {
+        //add players to the player list.
+        playerList.add(playerTwo);
+        playerList.add(playerOne);
+
+        //set the player list.
+        playerModel.setPlayersList(playerList);
+
+        assertTrue(playerModel.isLastPlayer(playerOne));
+        System.out.println("\"assertTrue\" is passed to test whether the \"Player One\" is the last" +
+                " player by isLastPlayer method. \n");
+
+        assertFalse(playerModel.isLastPlayer(playerTwo));
+        System.out.println("\"assertFalse\" is passed to test whether the \"Player Two\" is not the" +
+                " last player by isLastPlayer method. \n");
+    }
 }
