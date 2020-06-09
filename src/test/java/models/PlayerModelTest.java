@@ -1,10 +1,7 @@
 package models;
 
-import entity.Continent;
-import entity.Hmap;
+import entity.*;
 import org.junit.*;
-import entity.Country;
-import entity.Player;
 
 import java.util.*;
 
@@ -510,7 +507,7 @@ public class PlayerModelTest {
         //this methods move the army from origin country to destination country.
         assertTrue(playerModel.fortifyCurrentPlayer(hmap, playerOne,
                 "Canada", "USA", 10));
-        System.out.println("\"assertTrue\" is passed to fortifyCurrentPlayer method. \n");
+        System.out.println("\"assertTrue\" is passed to test fortifyCurrentPlayer method. \n");
 
 
         assertEquals(2, firstCountry.getArmy());
@@ -534,7 +531,7 @@ public class PlayerModelTest {
         firstCountry.setPlayer(playerOne);
 
         assertTrue(playerModel.isCountryBelongToPlayer(hmap, playerOne, "Canada"));
-        System.out.println("\"assertTrue\" is passed to isCountryBelongToPlayer method. \n");
+        System.out.println("\"assertTrue\" is passed to test isCountryBelongToPlayer method. \n");
     }
 
     /**
@@ -557,7 +554,7 @@ public class PlayerModelTest {
         secondCountry.setNeighborCountries(neighborCountries);
 
         assertTrue(playerModel.isCountriesAdjacent(hmap,"Canada", "USA"));
-        System.out.println("\"assertTrue\" is passed to isCountriesAdjacent method. \n");
+        System.out.println("\"assertTrue\" is passed to test isCountriesAdjacent method. \n");
     }
 
     /**
@@ -602,5 +599,121 @@ public class PlayerModelTest {
         assertFalse(playerModel.isLastPlayer(playerTwo));
         System.out.println("\"assertFalse\" is passed to test whether the \"Player Two\" is not the" +
                 " last player by isLastPlayer method. \n");
+    }
+
+    /**
+     * This method tests attackCountry method for PlayerModel class.
+     *
+     */
+    @Test
+    public void attackCountryTest() {
+
+        Map<String,Country> countryMap = new HashMap<>();
+        countryMap.put("Canada", firstCountry);
+        countryMap.put("USA", secondCountry);
+
+        hmap.setCountryMap(countryMap);
+
+        //assign a player to the added country.
+        firstCountry.setPlayer(playerOne);
+        secondCountry.setPlayer(playerTwo);
+
+
+        //set a neighbor for the countries.
+        List<String> neighborCountries = new ArrayList<>();
+        neighborCountries.add("USA");
+        firstCountry.setNeighborCountries(neighborCountries);
+        neighborCountries.add("Canada");
+        secondCountry.setNeighborCountries(neighborCountries);
+
+        firstCountry.setArmy(100);
+        secondCountry.setArmy(2);
+
+
+        playerTwo.setAssignedCountry(secondCountry);
+
+        List<Card> cardList = new ArrayList<>();
+        Card card = new Card(CardType.ARTILLERY);
+        cardList.add(card);
+        playerTwo.setCardList(cardList);
+
+        playerList.add(playerTwo);
+        playerList.add(playerOne);
+
+        //set the player list.
+        playerModel.setPlayersList(playerList);
+
+        Stack<Card> cardStack = new Stack<Card>();
+
+        playerModel.attackCountry(hmap, playerOne, "Canada",
+                "USA", 3, 1, cardStack);
+
+        System.out.println(cardStack);
+
+        System.out.println(playerModel.attackCountry(hmap, playerOne, "Canada",
+                "USA", 2, 12, cardStack));
+    }
+
+    /**
+     * This method tests modifyDefendingCountryOwnerShip method for PlayerModel class.
+     *
+     */
+    @Test
+    public void modifyDefendingCountryOwnerShipTest() {
+        //first declare and set a name for countries.
+        firstCountry.setName("Canada");
+        secondCountry.setName("USA");
+
+        //add the countries to a country list.
+        countryList.add(firstCountry);
+        countryList.add(secondCountry);
+
+        //add/assign players to the countries.
+        firstCountry.setPlayer(playerOne);
+        secondCountry.setPlayer(playerTwo);
+
+        //assign countries to the players
+        playerOne.setAssignedCountry(firstCountry);
+        playerTwo.setAssignedCountry(secondCountry);
+
+        //run this to check whether the countries are assigned to the players.
+        assertEquals(1, playerTwo.getAssignedCountry().size());
+        assertEquals(1, playerOne.getAssignedCountry().size());
+        System.out.println("\"assertEquals\" is passed to check size of the returned" +
+                " list of assigned countries for each player. \n");
+
+        //run this to modify ownership of the countries.
+        playerModel.modifyDefendingCountryOwnerShip(firstCountry,secondCountry);
+
+        assertEquals(2, playerTwo.getAssignedCountry().size());
+        assertEquals(0, playerOne.getAssignedCountry().size());
+        System.out.println("\"assertEquals\" is passed to check whether the assigned countries" +
+                " to players is updated by modifyDefendingCountryOwnerShip method. \n");
+    }
+
+    /**
+     * This method tests getContinentOwnedByPlayer method for PlayerModel class.
+     *
+     */
+    @Test
+    public void getContinentOwnedByPlayerTest() {
+
+        firstCountry.setName("Canada");
+
+        countryList.add(firstCountry);
+
+        firstCountry.setPlayer(playerOne);
+
+        continent = new Continent("North America",1);
+
+        firstCountry.setBelongToContinent(continent);
+
+        continent.setCountries(countryList);
+
+        playerOne.setAssignedCountry(firstCountry);
+
+//        playerModel.getContinentOwnedByPlayer(playerOne);
+
+        System.out.println(playerModel.getContinentOwnedByPlayer(playerOne));
     }
 }
