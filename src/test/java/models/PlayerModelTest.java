@@ -607,17 +607,15 @@ public class PlayerModelTest {
      */
     @Test
     public void attackCountryTest() {
-
+        //add countries to the map.
         Map<String,Country> countryMap = new HashMap<>();
         countryMap.put("Canada", firstCountry);
         countryMap.put("USA", secondCountry);
-
         hmap.setCountryMap(countryMap);
 
         //assign a player to the added country.
         firstCountry.setPlayer(playerOne);
         secondCountry.setPlayer(playerTwo);
-
 
         //set a neighbor for the countries.
         List<String> neighborCountries = new ArrayList<>();
@@ -626,8 +624,9 @@ public class PlayerModelTest {
         neighborCountries.add("Canada");
         secondCountry.setNeighborCountries(neighborCountries);
 
-        firstCountry.setArmy(100);
-        secondCountry.setArmy(2);
+        //add armies to the players.
+        firstCountry.setArmy(300);
+        secondCountry.setArmy(1);
 
 
         playerTwo.setAssignedCountry(secondCountry);
@@ -638,7 +637,7 @@ public class PlayerModelTest {
         playerTwo.setCardList(cardList);
 
         playerList.add(playerTwo);
-        playerList.add(playerOne);
+//        playerList.add(playerOne);
 
         //set the player list.
         playerModel.setPlayersList(playerList);
@@ -646,12 +645,31 @@ public class PlayerModelTest {
         Stack<Card> cardStack = new Stack<Card>();
 
         playerModel.attackCountry(hmap, playerOne, "Canada",
-                "USA", 3, 1, cardStack);
+                "USA", 1, 1, cardStack);
 
-        System.out.println(cardStack);
+//        System.out.println(cardStack);
 
         System.out.println(playerModel.attackCountry(hmap, playerOne, "Canada",
-                "USA", 2, 12, cardStack));
+                "USA", 1, 12, cardStack));
+    }
+
+    /**
+     * This method tests isPlayerWonGame method for PlayerModel class.
+     *
+     */
+    @Test
+    public void isPlayerWonGameTest() {
+        //assign countries to a player.
+        playerOne.setAssignedCountry(firstCountry);
+        playerOne.setAssignedCountry(secondCountry);
+
+        //add assigned countries to a list of player's countries
+        List<Country> countriesForPlayer = new ArrayList<>();
+        countriesForPlayer.add(firstCountry);
+        countriesForPlayer.add(secondCountry);
+
+        assertTrue(playerModel.isPlayerWonGame(playerOne, countriesForPlayer));
+        System.out.println("\"assertTrue\" is passed to test isPlayerWonGame method. \n");
     }
 
     /**
@@ -697,23 +715,28 @@ public class PlayerModelTest {
      */
     @Test
     public void getContinentOwnedByPlayerTest() {
+        //run this to make sure whether getContinentOwnedByPlayer method is returning an empty set.
+        assertEquals(0, playerModel.getContinentOwnedByPlayer(playerOne).size());
+        System.out.println("\"assertEquals\" is passed to test whether the return" +
+                " value by getContinentOwnedByPlayer method is an empty set. \n");
 
+        //first declare a country, add it to a list of counties and set a player for the declared country.
         firstCountry.setName("Canada");
-
         countryList.add(firstCountry);
-
         firstCountry.setPlayer(playerOne);
 
+        //declare a continent and add the country to the continent.
         continent = new Continent("North America",1);
-
         firstCountry.setBelongToContinent(continent);
 
+        //set the list of countries to the continent.
         continent.setCountries(countryList);
 
+        //assign a player to the country.
         playerOne.setAssignedCountry(firstCountry);
 
-//        playerModel.getContinentOwnedByPlayer(playerOne);
-
-        System.out.println(playerModel.getContinentOwnedByPlayer(playerOne));
+        assertNotEquals(0, playerModel.getContinentOwnedByPlayer(playerOne).size());
+        System.out.println("\"assertNotEquals\" is passed to test whether the return" +
+                " value by getContinentOwnedByPlayer method is not an empty set. \n");
     }
 }
