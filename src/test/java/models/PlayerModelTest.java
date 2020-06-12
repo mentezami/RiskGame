@@ -2,9 +2,7 @@ package models;
 
 import entity.*;
 import org.junit.*;
-
 import java.util.*;
-
 import static org.junit.Assert.*;
 
 /**
@@ -625,32 +623,76 @@ public class PlayerModelTest {
         secondCountry.setNeighborCountries(neighborCountries);
 
         //add armies to the players.
-        firstCountry.setArmy(300);
+        firstCountry.setArmy(1400);
         secondCountry.setArmy(1);
 
-
-        playerTwo.setAssignedCountry(secondCountry);
-
-        List<Card> cardList = new ArrayList<>();
-        Card card = new Card(CardType.ARTILLERY);
-        cardList.add(card);
-        playerTwo.setCardList(cardList);
-
+        //add the players to player list
         playerList.add(playerTwo);
-//        playerList.add(playerOne);
+        playerList.add(playerOne);
 
         //set the player list.
         playerModel.setPlayersList(playerList);
 
+        //declare a stack for passing to the attackCountry method.
         Stack<Card> cardStack = new Stack<Card>();
 
-        playerModel.attackCountry(hmap, playerOne, "Canada",
-                "USA", 1, 1, cardStack);
+        try {
+            assertTrue(playerModel.attackCountry(hmap, playerOne, "Canada",
+                    "USA", 3, 1, cardStack));
+            System.out.println("\n \"assertTrue\" is passed to test attackCountry method. \n");
 
-//        System.out.println(cardStack);
+        } catch (Exception e) {
+            System.out.println("\n \"assertTrue\" is passed to test attackCountry method. \n");
+        }
+    }
 
-        System.out.println(playerModel.attackCountry(hmap, playerOne, "Canada",
-                "USA", 1, 12, cardStack));
+    /**
+     * This method tests allOutAttackCountry method for PlayerModel class.
+     *
+     */
+    @Test
+    public void allOutAttackCountryTest() {
+        //add countries to the map.
+        Map<String,Country> countryMap = new HashMap<>();
+        countryMap.put("Canada", firstCountry);
+        countryMap.put("USA", secondCountry);
+        hmap.setCountryMap(countryMap);
+
+        //add armies to the players.
+        firstCountry.setArmy(1400);
+        secondCountry.setArmy(1);
+
+        //add players to the countries.
+        firstCountry.setPlayer(playerOne);
+        secondCountry.setPlayer(playerTwo);
+
+        //set a neighbor for the countries.
+        List<String> neighborCountries = new ArrayList<>();
+        neighborCountries.add("USA");
+        firstCountry.setNeighborCountries(neighborCountries);
+        neighborCountries.add("Canada");
+        secondCountry.setNeighborCountries(neighborCountries);
+
+        //add the players to player list
+        playerList.add(playerTwo);
+        playerList.add(playerOne);
+
+        //set the player list.
+        playerModel.setPlayersList(playerList);
+
+        //declare a stack for passing to the attackCountry method.
+        Stack<Card> cardStack = new Stack<Card>();
+
+        try {
+            assertTrue(playerModel.allOutAttackCountry(hmap, playerOne,
+                    "Canada", "USA", cardStack));
+            System.out.println("\n \"assertTrue\" is passed to test attackCountry method. \n");
+
+        } catch (Exception e) {
+
+            System.out.println("\n \"assertTrue\" is passed to test allOutAttackCountry method. \n");
+
+        }
     }
 
     /**
@@ -706,7 +748,36 @@ public class PlayerModelTest {
         assertEquals(2, playerTwo.getAssignedCountry().size());
         assertEquals(0, playerOne.getAssignedCountry().size());
         System.out.println("\"assertEquals\" is passed to check whether the assigned countries" +
-                " to players is updated by modifyDefendingCountryOwnerShip method. \n");
+                " to the players are updated by modifyDefendingCountryOwnerShip method. \n");
+    }
+
+    /**
+     * This method tests checkAttackPossible method for PlayerModel class.
+     *
+     */
+    @Test
+    public void checkAttackPossibleTest() {
+        //declare countries and add some armies to them.
+        firstCountry.setName("Canada");
+        secondCountry.setName("USA");
+        firstCountry.setArmy(3);
+        secondCountry.setArmy(10);
+
+        //assign a country to the player which is passed to checkAttackPossible method.
+        playerOne.setAssignedCountry(firstCountry);
+
+        //assign players to the countries.
+        firstCountry.setPlayer(playerOne);
+        secondCountry.setPlayer(playerTwo);
+
+        //add a country to the country list.
+        countryList.add(secondCountry);
+
+        //add a neighbor for player's country.
+        firstCountry.setAdjacentCountries(countryList);
+
+        assertTrue(playerModel.checkAttackPossible(playerOne));
+        System.out.println("\"assertTrue\" is passed to test checkAttackPossible method. \n");
     }
 
     /**

@@ -54,12 +54,12 @@ public class PlayerModel {
         for (Player player : playersList) {
             if (player.getName().equalsIgnoreCase(playerName)) {
                 playersList.remove(player);
-                System.out.println("Player: " + playerName + " removed from the game");
+                System.out.println("Player: \"" + playerName + "\" removed from the game");
                 return true;
             }
         }
 
-        System.out.println("Player: " + playerName + " does not exist in the game");
+        System.out.println("Player: \"" + playerName + "\" does not exist in the game");
 
         return false;
     }
@@ -82,12 +82,12 @@ public class PlayerModel {
         Player newPlayer = new Player(id + 1, playerName);
 
         if (playersList.contains(newPlayer)) {
-            System.out.println("Exception: Player: " + playerName + " already exists in the game");
+            System.out.println("Exception: Player: \"" + playerName + "\" already exists in the game");
             return false;
         }
 
         playersList.add(newPlayer);
-        System.out.println("Player: " + playerName + " is added in the game");
+        System.out.println("Player: \"" + playerName + "\" is added in the game");
 
         return true;
     }
@@ -112,7 +112,7 @@ public class PlayerModel {
 
             return true;
         } else {
-            System.out.println("Please create atleast 2 players to play the game.");
+            System.out.println("Please create at least 2 players to play the game.");
         }
 
         return false;
@@ -245,15 +245,15 @@ public class PlayerModel {
      * @return list for countries from root Map
      */
     public ArrayList<Country> getCountryListFromMap(Hmap map) {
-        ArrayList<Country> countryListfromMap = new ArrayList<Country>();
+        ArrayList<Country> countryListFromMap = new ArrayList<Country>();
 
         for (Continent c : map.getContinents()) {
             for (Country cont : c.getCountries()) {
-                countryListfromMap.add(cont);
+                countryListFromMap.add(cont);
             }
         }
 
-        return countryListfromMap;
+        return countryListFromMap;
     }
 
     /**
@@ -521,7 +521,7 @@ public class PlayerModel {
 
         // check if defending country does not belongs to same player
         if (isCountryBelongToPlayer(map, player, defendingCountryName)) {
-            System.out.println("Error: Can't attack becuase attacking country: " + attackingCountryName
+            System.out.println("Error: Can't attack because attacking country: " + attackingCountryName
                     + " and defending country " + defendingCountryName + " belongs to same" + player);
             return false;
         }
@@ -706,7 +706,7 @@ public class PlayerModel {
      * @param attackingCountry name of the attacking country
      * @param defendingCountry name of the defending country
      * @param cardStack stack of cards
-     * @return true is allout command is done successfully, false otherwise
+     * @return true is allOut command is done successfully, false otherwise
      */
     public Boolean allOutAttackCountry(Hmap map, Player player, String attackingCountry, String defendingCountry,
                                        Stack<Card> cardStack) {
@@ -736,7 +736,7 @@ public class PlayerModel {
                 numOfDefenderDice = defendCountry.getArmy();
 
             if (numOfDefenderDice == 0) {
-                System.out.println("Error: Can't do allout with 0 defender dice");
+                System.out.println("Error: Can't do allOut with 0 defender dice");
                 return false;
             }
 
@@ -755,12 +755,12 @@ public class PlayerModel {
      * This returns
      *
      * @param player Player object
-     * @param totalCoutries list of total countries
+     * @param totalCountries list of total countries
      * @return true if player won the game, false otherwise
      */
-    public boolean isPlayerWonGame(Player player, List<Country> totalCoutries) {
+    public boolean isPlayerWonGame(Player player, List<Country> totalCountries) {
 
-        if (player.getAssignedCountry().size() == totalCoutries.size())
+        if (player.getAssignedCountry().size() == totalCountries.size())
             return true;
 
         return false;
