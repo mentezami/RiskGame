@@ -7,75 +7,89 @@ import org.junit.BeforeClass;
 import org.junit.AfterClass;
 
 /**
- * This is a Test Class for testing card
+ * This is a test class for testing the methods in the Card class.
  *
  * @author Mahmoudreza
- * @version 0.0.1
+ * @version 0.0.2
  */
 public class CardTest {
 
-    Card card_INFANTRY;
-    Card card_CAVALRY;
-    Card card_ARTILLERY;
+    CardType cardTypeOne;
+    CardType cardTypeTwo;
+    CardType cardTypThree;
+    Card card;
+    Country country;
 
     /**
-     * This method runs before all test methods only one times.
+     * This method runs before all test methods.
      *
      */
     @BeforeClass
     public static void beforeAllTesting() {
-        System.out.println("This is before testing");
+        System.out.println("The test methods are started. \n");
     }
 
     /**
-     * This Method runs before test methods.
+     * This method runs before each test method to initialize the objects.
      *
      */
     @Before
-    public void beforeTest() {
-        card_INFANTRY = new Card(CardType.INFANTRY);
-        card_CAVALRY = new Card(CardType.CAVALRY);
-        card_ARTILLERY = new Card(CardType.ARTILLERY);
+    public void beforeEachTest() {
+        cardTypeOne = CardType.INFANTRY;
+        cardTypeTwo = CardType.CAVALRY;
+        cardTypThree = CardType.ARTILLERY;
+        country = new Country();
     }
 
     /**
-     * This method run after all test methods only one time.
+     * This method runs after all methods.
      *
      */
     @AfterClass
-    public static void afterPerformingTests() {
-        System.out.println("The test is done");
+    public static void afterAllTesting() {
+        System.out.println("The tests are done.");
     }
 
     /**
-     * This method test get card INFANTRY type.
+     * This method tests getCardType method for Card class.
      *
      */
     @Test
-    public void testCardINFANTRY() {
-        assertNotNull(card_INFANTRY.getCardType());
-        System.out.println("Card INFANTRY test is passed");
+    public void getCardTypeTest() {
+        /*
+        There are there type of cards.
+        first, initialize the card object
+        by pass the first type of card to to the constructor of Card class.
+         */
+        card = new Card(cardTypeOne);
+        assertSame(cardTypeOne, card.getCardType());
+        System.out.println("\"assertSame\" is passed to test getCardType method. \n");
+
+        //initialize the card object by passing the second type of card to the constructor of Card class.
+        card = new Card(cardTypeTwo);
+        assertSame(cardTypeTwo, card.getCardType());
+        System.out.println("\"assertSame\" is passed to test getCardType method. \n");
+
+        //initialize the card object by passing the third type of card to the constructor of Card class.
+        card = new Card(cardTypThree);
+        assertSame(cardTypThree, card.getCardType());
+        System.out.println("\"assertSame\" is passed to test getCardType method. \n");
     }
 
-    /**
-     * This method test get card CAVALRY type.
-     *
-     */
-    @Test
-    public void testCardCAVALRY() {
-        assertNotNull(card_CAVALRY.getCardType());
-        System.out.println("Card CAVALRY test is passed");
-    }
-
-    /**
-     * This method test get card ARTILLERY type.
-     *
-     */
-    @Test
-    public void testCardARTILLERY() {
-        assertNotNull(card_ARTILLERY.getCardType());
-        System.out.println("Card ARTILLERY test is passed");
-    }
+//    /**
+//     * This method tests getCountryToWhichCardBelong method for Card class.
+//     *
+//     */
+//    @Test
+//    public void getCountryToWhichCardBelongTest() {
+//        //first, initialize the card object and define the country name.
+//        card = new Card(cardTypeOne);
+//        country.setName("Canada");
+//        card.setCountryToWhichCardBelong(country);
+//
+//        assertEquals("Canada", card.getCountryToWhichCardBelong());
+//        System.out.println("\"assertEquals\" is passed to test getCountryToWhichCardBelong method. \n");
+//    }
 }
 
 

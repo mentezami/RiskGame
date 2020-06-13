@@ -80,7 +80,7 @@ public class CardModelTest {
         cardList.add(card);
         cardModel.setCardsToBeExchange(cardList);
 
-        assertEquals(cardModel.getCardsToBeExchange(),cardList);
+        assertEquals(cardList, cardModel.getCardsToBeExchange());
         System.out.println("\"assertEquals\" is passed to test getCardsToBeExchange method. \n");
     }
 
@@ -125,12 +125,12 @@ public class CardModelTest {
         run this to make sure the number of times for card is exchanged.
         The default number start from 5.
         */
-        assertEquals(cardModel.getCardExchanged(), 5);
+        assertEquals(5, cardModel.getCardExchanged());
         System.out.println("\"assertEquals\" is passed to test the number of times for cardExchanged" +
                 " which is 5 by default. \n");
 
         //run this to make sure the number of assigned army to the player is Zero.
-        assertSame(player.getArmies(),0);
+        assertSame(0, player.getArmies());
         System.out.println("\"assertSame\" is passed to test whether the number of assigned army" +
                 " to the player is Zero. \n");
 
@@ -143,11 +143,11 @@ public class CardModelTest {
         System.out.println("\"assertFalse\" is passed to test exchangeCards method and whether " +
                 "stackOfCards is still empty. \n");
 
-        assertNotEquals(cardModel.getCardExchanged(), 5);
+        assertNotEquals(5, cardModel.getCardExchanged());
         System.out.println("\"assertNotEquals\" is passed to test whether the number of times for" +
                 " cardExchanged is changed after run exchangeCards method. \n");
 
-        assertNotSame(player.getArmies(),0);
+        assertNotSame(0, player.getArmies());
         System.out.println("\"assertNotSame\" is passed to test whether the number of assigned army" +
                 " to the player is changed. \n");
     }
