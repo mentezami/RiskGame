@@ -680,13 +680,13 @@ public class PlayerModelTest {
         //set the player list.
         playerModel.setPlayersList(playerList);
 
-        //declare a stack for passing to the attackCountry method.
+        //declare a stack for passing to the allOutAttackCountry method.
         Stack<Card> cardStack = new Stack<Card>();
 
         try {
             assertTrue(playerModel.allOutAttackCountry(hmap, playerOne,
                     "Canada", "USA", cardStack));
-            System.out.println("\n \"assertTrue\" is passed to test attackCountry method. \n");
+            System.out.println("\n \"assertTrue\" is passed to test allOutAttackCountry method. \n");
 
         } catch (Exception e) {
 
