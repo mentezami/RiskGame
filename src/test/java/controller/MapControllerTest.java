@@ -123,15 +123,15 @@ public class MapControllerTest {
         continent = new Continent(continentName,continentValue);
         continent.setCountries(countryList);
 
-        assertEquals(continent.getName(), continentName);
-        assertEquals(continent.getValue(), continentValue);
+        assertEquals(continentName, continent.getName());
+        assertEquals(continentValue, continent.getValue());
         System.out.println("\"assertEquals\" to test for both getName and getValue methods are passed" +
                 " to see the name and value for a continent before applying updateContinent method. \n");
 
         MapController.updateContinent(continent, map, "New Zealand", "7");
 
-        assertEquals(continent.getValue(), 7);
-        assertEquals(continent.getName(), "New Zealand");
+        assertEquals(7, continent.getValue());
+        assertEquals("New Zealand", continent.getName());
         System.out.println("\"assertEquals\" to test for both getName and getValue methods are passed" +
                 " to validate the result of updateContinent method. \n");
     }
@@ -220,12 +220,12 @@ public class MapControllerTest {
         continentList.add(continent);
         map.setContinents(continentList);
 
-        assertEquals(MapController.updateCountry(secondCountry, map,"Germany",
-                "3","3", firstCountry), secondCountry);
+        assertEquals(secondCountry, MapController.updateCountry(secondCountry, map,"Germany",
+                "3","3", firstCountry));
         System.out.println("\"assertEquals\" is passed to test updateCountry method. \n");
 
-        assertNotEquals(MapController.updateCountry(secondCountry, map,"Germany",
-                "3","3", firstCountry), firstCountry);
+        assertNotEquals(firstCountry, MapController.updateCountry(secondCountry, map,"Germany",
+                "3","3", firstCountry));
         System.out.println("\"assertNotEquals\" is passed to test updateCountry method. \n");
     }
 
