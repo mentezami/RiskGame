@@ -76,20 +76,20 @@ public class CardTest {
         System.out.println("\"assertSame\" is passed to test getCardType method. \n");
     }
 
-//    /**
-//     * This method tests getCountryToWhichCardBelong method for Card class.
-//     *
-//     */
-//    @Test
-//    public void getCountryToWhichCardBelongTest() {
-//        //first, initialize the card object and define the country name.
-//        card = new Card(cardTypeOne);
-//        country.setName("Canada");
-//        card.setCountryToWhichCardBelong(country);
-//
-//        assertEquals("Canada", card.getCountryToWhichCardBelong());
-//        System.out.println("\"assertEquals\" is passed to test getCountryToWhichCardBelong method. \n");
-//    }
+    /**
+     * This method tests getCountryToWhichCardBelong method for Card class.
+     *
+     */
+    @Test
+    public void getCountryToWhichCardBelongTest() {
+        //first, initialize the card object and define the country name.
+        card = new Card(cardTypeOne);
+        country.setName("Canada");
+        card.setCountryToWhichCardBelong(country);
+
+        assertEquals(country, card.getCountryToWhichCardBelong());
+        System.out.println("\"assertEquals\" is passed to test getCountryToWhichCardBelong method. \n");
+    }
 }
 
 
