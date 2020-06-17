@@ -4,10 +4,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.Assert.*;
 
 /**
@@ -21,8 +19,9 @@ public class CountryTest {
     Country country;
     Player player;
     Continent continent;
-    List<String> neighborCountries = new ArrayList<>();
-    List<Country> adjacentCountries = new ArrayList<>();
+    List<String> neighborCountries;
+    List<Country> adjacentCountries;
+    List<Country> countryList;
 
     /**
      * This method runs before all test methods.
@@ -42,6 +41,9 @@ public class CountryTest {
         country = new Country();
         player = new Player(1, "Player");
         continent = new Continent("North America", 1);
+        neighborCountries = new ArrayList<>();
+        adjacentCountries = new ArrayList<>();
+        countryList = new ArrayList<>();
     }
 
     /**
@@ -164,5 +166,82 @@ public class CountryTest {
 
         assertEquals(yCoordinate, country.getyCoordinate());
         System.out.println("\"assertEquals\" is passed to test getyCoordinate method. \n");
+    }
+
+    /**
+     * This method tests getBelongToContinent method for Country class.
+     *
+     */
+    @Test
+    public void getBelongToContinentTest() {
+        //first run this to make sure no country is set to the continent.
+        assertNull(country.getBelongToContinent());
+        System.out.println("\"assertNull\" is passed to test whether " +
+                "no country is set to the continent. \n");
+
+        //declare a country and add it to the country list for assigning to the continent.
+        country.setName("Canada");
+        countryList.add(country);
+        continent.setCountries(countryList);
+        country.setBelongToContinent(continent);
+
+        assertNotNull(country.getBelongToContinent());
+        System.out.println("\"assertNotNull\" is passed to test getBelongToContinent method. \n");
+    }
+
+    /**
+     * This method tests getNeighborCountries method for Country class.
+     *
+     */
+    @Test
+    public void getNeighborCountriesTest() {
+        //first run this to make sure the returned list is empty.
+        assertTrue(country.getNeighborCountries().isEmpty());
+        System.out.println("\"assertTrue\" is passed to test whether " +
+                "there is no neighbor country set to the continent. \n");
+
+        //add a neighbor country to the neighbor list.
+        neighborCountries.add("USA");
+        country.setNeighborCountries(neighborCountries);
+
+        assertFalse(country.getNeighborCountries().isEmpty());
+        System.out.println("\"assertFalse\" is passed to test getNeighborCountries method. \n");
+    }
+
+    /**
+     * This method tests getAdjacentCountries method for Country class.
+     *
+     */
+    @Test
+    public void getAdjacentCountriesTest() {
+        //first run this to make sure the returned list is empty.
+        assertTrue(country.getAdjacentCountries().isEmpty());
+        System.out.println("\"assertTrue\" is passed to test whether " +
+                "there is no adjacent country set to the continent. \n");
+
+        //declare and set am adjacent country to the adjacent list.
+        country.setName("Canada");
+        adjacentCountries.add(country);
+        country.setAdjacentCountries(adjacentCountries);
+
+        assertFalse(country.getAdjacentCountries().isEmpty());
+        System.out.println("\"assertFalse\" is passed to test getAdjacentCountries method. \n");
+    }
+
+    /**
+     * This method tests isVisited method for Country class.
+     *
+     */
+    @Test
+    public void isVisitedTest() {
+        //run this to make sure the isVisited method is not set.
+        assertFalse(country.isVisited());
+        System.out.println("\"assertFalse\" is passed to test whether" +
+                " the isVisited methods is not set. \n");
+
+        country.setVisited(true);
+
+        assertTrue(country.isVisited());
+        System.out.println("\"assertTrue\" is passed to test isVisited method. \n");
     }
 }
