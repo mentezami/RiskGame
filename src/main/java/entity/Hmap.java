@@ -9,7 +9,7 @@ import java.util.*;
  * @see Country
  * @see Continent
  * @author Mahmoudreza
- * @version 0.0.1
+ * @version 0.0.2
  */
 public class Hmap {
 
@@ -25,12 +25,12 @@ public class Hmap {
      *
      */
     public Hmap() {
-        filesAttribute = new HashMap <String, String>();
-        continents = new ArrayList <Continent>();
-        continentMap = new HashMap <String,Continent>();
-        countriesIdxMap = new HashMap <String,Integer>();
-        countries = new ArrayList <Country>();
-        countryMap = new TreeMap<String, Country>(String.CASE_INSENSITIVE_ORDER);
+        filesAttribute = new HashMap <>();
+        continents = new ArrayList <>();
+        continentMap = new HashMap <>();
+        countriesIdxMap = new HashMap <>();
+        countries = new ArrayList <>();
+        countryMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     }
 
     /**
@@ -39,10 +39,10 @@ public class Hmap {
      * @param newMap The new map object.
      */
     public Hmap(Hmap newMap) {
-        filesAttribute = new HashMap <String, String>(newMap.filesAttribute);
-        continents = new ArrayList <Continent>(newMap.continents);
-        continentMap = new HashMap <String,Continent>(newMap.continentMap);
-        countriesIdxMap = new HashMap <String,Integer>(newMap.countriesIdxMap);
+        filesAttribute = new HashMap <>(newMap.filesAttribute);
+        continents = new ArrayList <>(newMap.continents);
+        continentMap = new HashMap <>(newMap.continentMap);
+        countriesIdxMap = new HashMap <>(newMap.countriesIdxMap);
     }
 
     /**
@@ -64,21 +64,21 @@ public class Hmap {
     }
 
     /**
-     * Setter method for the country hash-map.
-     *
-     * @param countryMap hash-map of country
-     */
-    public void setCountryMap(Map<String, Country> countryMap) {
-        this.countryMap = countryMap;
-    }
-
-    /**
      * Get method for country hash-map.
      *
      * @return map of countries
      */
     public Map<String, Country> getCountryMap() {
         return countryMap;
+    }
+
+    /**
+     * Setter method for the country hash-map.
+     *
+     * @param countryMap hash-map of country
+     */
+    public void setCountryMap(Map<String, Country> countryMap) {
+        this.countryMap = countryMap;
     }
 
     /**
@@ -93,7 +93,7 @@ public class Hmap {
     /**
      * This sets the continents.
      *
-     * @param continents
+     * @param continents list of continents.
      */
     public void setContinents(List <Continent> continents) {
         this.continents = continents;
@@ -116,7 +116,7 @@ public class Hmap {
     }
 
     /**
-     * Returns the continent index map.
+     * Returns the country index map.
      *
      * @return countriesIdxMap
      */
@@ -125,9 +125,9 @@ public class Hmap {
     }
 
     /**
-     * This sets the continent index map.
+     * This sets the country index map.
      *
-     * @param countriesIdxMap
+     * @param countriesIdxMap map of index for countries.
      */
     public void setCountriesIdxMap(HashMap <String, Integer> countriesIdxMap) {
         this.countriesIdxMap = countriesIdxMap;
@@ -145,7 +145,7 @@ public class Hmap {
     /**
      * This sets the continent map.
      *
-     * @param continentMap
+     * @param continentMap map of continent.
      */
     public void setContinentMap(HashMap <String, Continent> continentMap) {
         this.continentMap = continentMap;
@@ -161,6 +161,7 @@ public class Hmap {
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
         return "Hmap [ mapData = " + filesAttribute + ", continents = " + continents + ", continentMap = " + continentMap + "]";
     }
@@ -168,6 +169,7 @@ public class Hmap {
     /* (non-Javadoc)
      * @see java.lang.Object#clone()
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         ObjectOutputStream output_obj = null;
         ObjectInputStream input_obj = null;
