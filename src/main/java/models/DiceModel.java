@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * This class is handles the dice.
+ * This class handles the dice.
  *
  * @author Mahmoudreza
  * @version 0.0.1
@@ -36,7 +36,7 @@ public class DiceModel {
      * This roll the Dices of attacker and defender.
      * 
      */
-    public void rolldice() {
+    public void rollDice() {
 
         this.attackerDiceValues= new ArrayList<>();
         this.defenderDiceValues = new ArrayList<>();
