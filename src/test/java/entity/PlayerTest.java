@@ -6,18 +6,21 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.Assert.*;
 
 /**
  * This is a test class for testing the methods in the Player class.
  *
+ * @see Player
  * @author Mahmoudreza
  * @version 0.0.1
  */
 public class PlayerTest {
 
     Player player;
+    Card card;
+    Country country;
+    List<Card> cardList;
 
     /**
      * This method runs before all test methods.
@@ -35,6 +38,8 @@ public class PlayerTest {
     @Before
     public void beforeEachTest() {
         player = new Player(1, "Player");
+        country = new Country();
+        cardList = new ArrayList<>();
     }
 
     /**
@@ -52,25 +57,26 @@ public class PlayerTest {
      */
     @Test
     public void getCardListTest() {
-        //declare a card
-        Card card = new Card(CardType.ARTILLERY);
+        //first run this to make sure the list of card for the player is empty.
+        assertTrue(player.getCardList().isEmpty());
+        System.out.println("\"assertTrue\" is passed to test whether " +
+                "there is no card set to the player. \n");
 
-        //declare and set a country to a card
-        Country country = new Country();
+        //declare a card.
+        card = new Card(CardType.ARTILLERY);
+
+        //declare and add a country to a card.
         country.setName("Canada");
         card.setCountryToWhichCardBelong(country);
 
-        //add the card to the list
-        List<Card> cardList = new ArrayList<>();
+        //add the card to the list.
         cardList.add(card);
 
-        //run this to set cardList
+        //run this to set cardList.
         player.setCardList(cardList);
 
-        assertEquals(player.getCardList().size(), 1);
-        System.out.println("\"assertEquals\" is passed to test getCardList method" +
-                " which returns a variable with type of \"List\", so this method tests" +
-                " size of the list. \n");
+        assertFalse(player.getCardList().isEmpty());
+        System.out.println("\"assertFalse\" is passed to test getCardList method. \n");
     }
 
     /**
@@ -81,7 +87,7 @@ public class PlayerTest {
     public void getIdTest() {
         player.setId(2);
 
-        assertEquals(player.getId(), 2);
+        assertEquals(2, player.getId());
         System.out.println("\"assertEquals\" is passed to test getId method. \n");
     }
 
@@ -91,9 +97,9 @@ public class PlayerTest {
      */
     @Test
     public void getNameTest() {
-        player.setName("Mahmoudreza");
+        player.setName("Player Test");
 
-        assertEquals(player.getName(), "Mahmoudreza");
+        assertEquals("Player Test", player.getName());
         System.out.println("\"assertEquals\" is passed to test getName method. \n");
     }
 
@@ -105,7 +111,7 @@ public class PlayerTest {
     public void getArmiesTest() {
         player.setArmies(10);
 
-        assertEquals(player.getArmies(), 10);
+        assertEquals(10, player.getArmies());
         System.out.println("\"assertEquals\" is passed to test getArmies method. \n");
     }
 
@@ -115,17 +121,19 @@ public class PlayerTest {
      */
     @Test
     public void getAssignedCountryTest() {
-        //declare a country
-        Country country = new Country();
+        //first run this to make sure the list of assigned country to the player is empty.
+        assertTrue(player.getAssignedCountry().isEmpty());
+        System.out.println("\"assertTrue\" is passed to test whether " +
+                "there is no country assigned to the player. \n");
+
+        //declare a country.
         country.setName("Canada");
 
-        //run this to assign the country to the player
+        //run this to assign the country to the player.
         player.setAssignedCountry(country);
 
-        assertEquals(player.getAssignedCountry().size(), 1);
-        System.out.println("\"assertEquals\" is passed to test getAssignedCountry method" +
-                " which returns a variable with type of \"List\", so this method tests" +
-                " size of the list. \n");
+        assertFalse(player.getAssignedCountry().isEmpty());
+        System.out.println("\"assertFalse\" is passed to test getAssignedCountry method. \n");
     }
 
     /**
@@ -136,8 +144,9 @@ public class PlayerTest {
     public void getNumberOfTimeCardsExchangedTest() {
         player.setNumberOfTimesCardsExchanged(1);
 
-        assertEquals(player.getNumberOfTimeCardsExchanged(), 1);
-        System.out.println("\"assertEquals\" is passed to test getArmies method. \n");
+        assertEquals(1, player.getNumberOfTimeCardsExchanged());
+        System.out.println("\"assertEquals\" is passed to test " +
+                "getNumberOfTimeCardsExchanged method. \n");
     }
 }
 
