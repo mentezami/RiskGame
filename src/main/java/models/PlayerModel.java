@@ -562,7 +562,7 @@ public class PlayerModel {
             defenderNumOfDice = getDefenderDice(defenderPlayer, defendCountry);
 
         DiceModel diceModel = new DiceModel(attackCountry, defendCountry, attackerNumOfDice, defenderNumOfDice);
-        diceModel.rolldice();
+        diceModel.rollDice();
         diceModel.getResultAfterRoll();
 
         // Change ownership of country
