@@ -113,7 +113,7 @@ public class CardExchangeView implements Observer{
                                 }
                             }
 
-                            Boolean retVal = gameController.getCardModel().areCardsvalidForExchange(cardsChoosen);
+                            Boolean retVal = gameController.getCardModel().areCardsValidForExchange(cardsChoosen);
 
                             if (retVal) {
                                 gameController.getCardModel().exchangeCards(gameController.getCurrentPlayer(),
