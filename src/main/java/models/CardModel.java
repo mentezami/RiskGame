@@ -11,7 +11,7 @@ import entity.Hmap;
 import entity.Player;
 
 /**
- * This class is handles the behavior of the card.
+ * This class handles the behavior of the card.
  *
  * @author Mahmoudreza
  * @version 0.0.1
@@ -84,15 +84,15 @@ public class CardModel {
      * exchange of cards between players.
      *
      * @param player current Player object
-     * @param cardlist list of cards
+     * @param cardList list of cards
      * @param cardStack current stack of cards
      */
-    public void exchangeCards(Player player, List<Card> cardlist, Stack<Card> cardStack) {
+    public void exchangeCards(Player player, List<Card> cardList, Stack<Card> cardStack) {
 
-        Boolean isCardArmiesAssigned = false;
+        boolean isCardArmiesAssigned = false;
 
         for (Country c : player.getAssignedCountry()) {
-            for (Card cardChosen: cardlist) {
+            for (Card cardChosen: cardList) {
                 if (c.getName().equalsIgnoreCase(cardChosen.getCountryToWhichCardBelong().getName())) {
                     player.setArmies(player.getArmies() + 2);
                     isCardArmiesAssigned = true;
@@ -107,7 +107,7 @@ public class CardModel {
         player.setArmies(player.getArmies() + getCardExchanged());
         setNumberOfTimesCardExchanged();
 
-        for (Card card : cardlist) {
+        for (Card card : cardList) {
             // Removing the exchanged cards from players hand
             player.getCardList().remove(card);
             // Adding cards back to deck
@@ -118,15 +118,15 @@ public class CardModel {
     /**
      * validates card for exchange
      *
-     * @param cardlist list of cards
+     * @param cardList list of cards
      * @return true if cards are valid for exchange, false otherwise
      */
-    public boolean areCardsvalidForExchange(List<Card> cardlist) {
+    public boolean areCardsValidForExchange(List<Card> cardList) {
 
-        if (cardlist.size() == 3) {
+        if (cardList.size() == 3) {
             int infantry = 0, cavalry = 0, artillery = 0;
 
-            for (Card card : cardlist) {
+            for (Card card : cardList) {
                 if (card.getCardType().toString().equals(CardType.CAVALRY.toString())) {
                     infantry++;
                 } else if (card.getCardType().toString().equals(CardType.INFANTRY.toString())) {
