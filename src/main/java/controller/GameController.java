@@ -28,7 +28,7 @@ public class GameController extends Observable {
     Hmap rootMap;
     MapWriter mapWriter;
     String editFilePath = "";
-    boolean isReinfoceArmiesAssigned = false;
+    boolean isReinforceArmiesAssigned = false;
 
     PlayerModel playerModel;
     CardModel cardModel;
@@ -469,7 +469,7 @@ public class GameController extends Observable {
             notifyObservers("card-exchange");
         }
 
-        if (!isReinfoceArmiesAssigned) {
+        if (!isReinforceArmiesAssigned) {
 
             playerModel.assignReinforceArmiesToPlayers();
 
@@ -477,7 +477,7 @@ public class GameController extends Observable {
             setChanged();
             notifyObservers("show-world-domination");
 
-            isReinfoceArmiesAssigned = true;
+            isReinforceArmiesAssigned = true;
         }
 
         System.out.println("Current game phase: Gameplay reinforcement phase (reinforce, showmap)");
@@ -724,7 +724,7 @@ public class GameController extends Observable {
 
                     // check all players have played
                     if (playerModel.isLastPlayer(getCurrentPlayer())) {
-                        isReinfoceArmiesAssigned = false;
+                        isReinforceArmiesAssigned = false;
                         System.out.println("******* All players have played in their turn **********");
                     }
 
