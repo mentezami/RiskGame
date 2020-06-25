@@ -10,49 +10,49 @@ import java.io.*;
 import entity.Hmap;
 
 /**
- * This class tests all functions for validating Map and Continent.
+ * This is a test class for testing the methods in the MapReader class.
  *
+ * @see MapReader
  * @author Mahmoudreza
- * @version 0.0.1
+ * @version 0.0.2
  */
 public class MapReaderTest {
 
-    static File file = null;
-    MapReader mapReader = null;
-    Hmap hmap = null;
-    ClassLoader classLoader = null;
-    static String[] invalidFiles = { "world.map", "country_with_two_continents.map",
+    static File file;
+    MapReader mapReader;
+    Hmap hmap;
+    ClassLoader classLoader;
+    String[] invalidFiles = { "world.map", "country_with_two_continents.map",
             "country_without_border.map", "country_without_continent.map",
             "countries_in_same_continent.map" };
 
     /**
-     * This method runs before running all methods in the class.
+     * This method runs before all test methods.
      *
      */
     @BeforeClass
-    public static void beforeClass() {
-        System.out.println("The tests are started");
+    public static void beforeAllTesting() {
+        System.out.println("The test methods are started. \n");
     }
 
     /**
-     * This method runs before running each test methods.
+     * This method runs before each test method to initialize the objects.
      *
-     * @throws IOException
      */
     @Before
-    public void beforeMethods() throws IOException {
+    public void beforeEachTest() {
         mapReader = new MapReader();
         hmap = new Hmap();
         classLoader = getClass().getClassLoader();
     }
 
     /**
-     * This method runs after all testing methods.
+     * This method runs after all methods.
      *
      */
     @AfterClass
-    public static void afterAllTests() {
-        System.out.println("All tests are done");
+    public static void afterAllTesting() {
+        System.out.println("The tests are done.");
     }
 
     /**
