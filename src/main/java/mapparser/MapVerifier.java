@@ -77,7 +77,7 @@ public class MapVerifier {
      */
     public static boolean isContinentConnectedGraph(Continent continent, Hmap map) {
 
-        runDfsOnCounty(continent.getCountries().get(0), map);
+        runDfsOnCountry(continent.getCountries().get(0), map);
         boolean returnValue = true;
 
         for (Country t : continent.getCountries()) {
@@ -101,7 +101,7 @@ public class MapVerifier {
      * @param country country to be traversed in bfs
      * @param map map object
      */
-    public static void runDfsOnCounty(Country country, Hmap map) {
+    public static void runDfsOnCountry(Country country, Hmap map) {
 
         if (country.isVisited() == true)
             return;
@@ -111,7 +111,7 @@ public class MapVerifier {
         for (Country t : country.getAdjacentCountries()) {
             if ((t.getBelongToContinent() == country.getBelongToContinent())
                     && t.isVisited() == false)
-                runDfsOnCounty(t, map);
+                runDfsOnCountry(t, map);
         }
     }
 
