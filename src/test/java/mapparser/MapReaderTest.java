@@ -18,11 +18,11 @@ import entity.Hmap;
  */
 public class MapReaderTest {
 
-    static File file;
+    File file;
     MapReader mapReader;
     Hmap hmap;
     ClassLoader classLoader;
-    String[] invalidFiles = { "world.map", "country_with_two_continents.map",
+    String[] mapFiles = { "world.map", "country_with_two_continents.map",
             "country_without_border.map", "country_without_continent.map",
             "countries_in_same_continent.map" };
 
@@ -56,15 +56,19 @@ public class MapReaderTest {
     }
 
     /**
-     * This method tests map validation.
+     * This method tests readMapFileTest method for MapReader class.
      *
      * @throws InvalidMap
      */
     @Test
-    public void testMapValidation() throws InvalidMap {
+    public void readMapFileTest() throws InvalidMap {
+        //first initialize a file object to store a map file.
         file = new File(classLoader.getResource("world.map").getFile());
-        hmap = mapReader.readMapFile(file);
-        assertEquals(hmap.getContinents().size(), 6);
+
+        //run this to check whether the readMapFile method reads the map file.
+        assertNotNull(mapReader.readMapFile(file));
+        System.out.println("\"assertNotNull\" is passed to test whether " +
+                "the map file is read by readMapFile method. \n");
     }
 
     /**
@@ -72,9 +76,9 @@ public class MapReaderTest {
      *
      * @throws InvalidMap (Exception)
      */
-    @Test(expected = InvalidMap.class)
-    public void testCountriesInTheSameContinent() throws InvalidMap {
-        file = new File(classLoader.getResource(invalidFiles[4]).getFile());
+    @Test
+    public void readMapFileCountriesInTheSameContinentTest() throws InvalidMap {
+        file = new File(classLoader.getResource(mapFiles[4]).getFile());
         mapReader.readMapFile(file);
     }
 
@@ -85,7 +89,7 @@ public class MapReaderTest {
      */
     @Test(expected = InvalidMap.class)
     public void testCountriesWithoutBorder() throws InvalidMap {
-        file = new File(classLoader.getResource(invalidFiles[2]).getFile());
+        file = new File(classLoader.getResource(mapFiles[2]).getFile());
         mapReader.readMapFile(file);
     }
 
@@ -96,7 +100,7 @@ public class MapReaderTest {
      */
     @Test(expected = InvalidMap.class)
     public void testCountriesWithTwoContinents() throws InvalidMap {
-        file = new File(classLoader.getResource(invalidFiles[1]).getFile());
+        file = new File(classLoader.getResource(mapFiles[1]).getFile());
         mapReader.readMapFile(file);
     }
 
@@ -107,7 +111,7 @@ public class MapReaderTest {
      */
     @Test(expected = InvalidMap.class)
     public void testCountriesWithoutContinents() throws InvalidMap {
-        file = new File(classLoader.getResource(invalidFiles[3]).getFile());
+        file = new File(classLoader.getResource(mapFiles[3]).getFile());
         mapReader.readMapFile(file);
     }
 }
