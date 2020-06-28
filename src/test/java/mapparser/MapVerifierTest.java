@@ -20,7 +20,6 @@ import entity.Hmap;
  */
 public class MapVerifierTest {
 
-    MapVerifier mapverifier;
     Continent continent_1;
     Continent continent_2;
     Country country_1;
@@ -162,7 +161,7 @@ public class MapVerifierTest {
         //first run this to make sure the returned list by getAdjacentContinents method is empty.
         assertTrue(MapVerifier.getAdjacentContinents(continent_1, hmap).isEmpty());
         System.out.println("\"assertTrue\" is passed to test whether " +
-                        "the returned list by getAdjacentContinents method is empty. ");
+                        "the returned list by getAdjacentContinents method is empty. \n");
 
         //declare and add some countries and continents to the map.
         country_1.setName("Turkey");
@@ -181,4 +180,3 @@ public class MapVerifierTest {
                 "the returned list by getAdjacentContinents method is not empty. \n");
     }
 }
-
