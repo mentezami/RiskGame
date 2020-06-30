@@ -139,8 +139,7 @@ public class PlayerModel {
     /**
      * This method generates random number from 1 to number.
      *
-     * @param number number up to which find random numbers to be generated, from 0 to
-     *               number
+     * @param number number up to which find random numbers to be generated, from 0 to number
      * @return random number from 1 to number, including number
      */
     public static int getRandomNumber(int number) {
@@ -239,7 +238,7 @@ public class PlayerModel {
     }
 
     /**
-     * Parses the map and gets country list
+     * Parses the map and gets country list.
      *
      * @param map map object
      * @return list for countries from root Map
@@ -258,7 +257,7 @@ public class PlayerModel {
 
     /**
      * It shows all countries and continents, armies on each country, ownership, and
-     * connectivity
+     * connectivity.
      *
      * @param map main map
      */

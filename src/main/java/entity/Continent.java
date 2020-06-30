@@ -22,7 +22,8 @@ public class Continent {
     private boolean isVisited = false;
 
     /**
-     * Default constructor of Continent class
+     * Default constructor of Continent class.
+     *
      */
     public Continent() {
         this.countriesList = new ArrayList<Country>();
@@ -30,7 +31,7 @@ public class Continent {
     }
 
     /**
-     * Constructor of Continent class
+     * Constructor of Continent class.
      *
      * @param name used for name of the continent
      * @param value used for controlling value of the continent

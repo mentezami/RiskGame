@@ -101,6 +101,7 @@ public class Hmap {
 
     /**
      * It returns list of countries.
+     *
      * @return countries
      */
     public ArrayList <Country> getCountries() {
@@ -109,6 +110,7 @@ public class Hmap {
 
     /**
      * This sets the countries.
+     *
      * @param countries list of countries
      */
     public void setCountries(ArrayList <Country> countries) {
