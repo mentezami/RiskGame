@@ -19,6 +19,7 @@ public class MapController {
 
     /**
      * Removes continent from the map.
+     *
      * @param map Current map object.
      * @param continentName Name of the continent.
      * @return true if continent got removed successfully, otherwise false
@@ -46,6 +47,7 @@ public class MapController {
 
     /**
      * Adds continent to the map with details like control value etc.
+     *
      * @param map Current map object.
      * @param name Name of the continent.
      * @param ctrlValue Control value of the continent.
@@ -80,6 +82,7 @@ public class MapController {
 
     /**
      * This method checks whether the continent name is present or not.
+     *
      * @param listContinents list of all continents
      * @param name name of the continents to be updated
      * @return true if list does not contain other continents with same name
@@ -90,6 +93,7 @@ public class MapController {
 
     /**
      * This method updates the continent details if the user selects the continent.
+     *
      * @param continent The continent whose details must be updated.
      * @param map map object {@link Hmap}
      * @param name name of the continent to be updated
@@ -113,6 +117,7 @@ public class MapController {
 
     /**
      * This checks whether the Country name is there or not.
+     *
      * @param list list of all Countries
      * @param name name of the Country to be checked
      * @return true if list does not contain other Country with same name
@@ -123,6 +128,7 @@ public class MapController {
 
     /**
      * Removes country from the map.
+     *
      * @param map Current map object.
      * @param name Name of the Country.
      * @return true if Country gets removed from map, false otherwise.
@@ -154,6 +160,7 @@ public class MapController {
 
     /**
      * Adds country to the map and the continent with its respective details.
+     *
      * @param map Current map object.
      * @param name Name of the Country.
      * @param continentName Continent to which the country belongs to.
@@ -198,6 +205,7 @@ public class MapController {
 
     /**
      * This method updates the continent details when the user selects the country.
+     *
      * @param country The country whose values must be updated.
      * @param map Map Object {@link Hmap}
      * @param name name for the Country to be updated - new name for the Country
@@ -243,6 +251,7 @@ public class MapController {
 
     /**
      * This method removes the country to the corresponding continent.
+     *
      * @param map Current map object.
      * @param countryName Name of the Country.
      * @param nbrCountryName Name of the neighbor Country.
@@ -291,6 +300,7 @@ public class MapController {
 
     /**
      * This method adds the country to the corresponding continent.
+     *
      * @param map Current map object.
      * @param countryName Name of the Country.
      * @param nbrCountryName Name of the neighbor Country.
@@ -363,6 +373,7 @@ public class MapController {
 
     /**
      * This method adds the country to the corresponding continent.
+     *
      * @param continent continent object which will be assigned Countries
      * @param country The country which is added to the continent.
      * @return the Object to the newly updated continent.
@@ -382,6 +393,7 @@ public class MapController {
 
     /**
      * This method shows the map.
+     *
      * @param map current map object
      */
     public static void mapEditorShowmap(Hmap map) {

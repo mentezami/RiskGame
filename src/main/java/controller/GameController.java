@@ -742,7 +742,8 @@ public class GameController extends Observable {
     }
 
     /**
-     * This will change the current player
+     * This will change the current player.
+     *
      */
     public void changeCurrentPlayer() {
         int currentPlayerIdx = playerModel.getPlayersList().indexOf(getCurrentPlayer());

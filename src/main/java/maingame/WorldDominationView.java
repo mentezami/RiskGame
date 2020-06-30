@@ -14,7 +14,8 @@ import entity.Hmap;
 import entity.Player;
 
 /**
- * This class controls the behavior of the World Domination View
+ * This class controls the behavior of the World Domination View.
+ *
  * <ul>
  * <li>the percentage of the map controlled by every player </li>
  * <li>the continents controlled by every player</li>
@@ -27,7 +28,8 @@ import entity.Player;
 public class WorldDominationView implements Observer {
 
     /**
-     * This method Update Observable and Argument
+     * This method Update Observable and Argument.
+     *
      * @param o Observable object
      * @param arg an object of Object
      * @see java.util.Observer#update(java.util.Observable, java.lang.Object)

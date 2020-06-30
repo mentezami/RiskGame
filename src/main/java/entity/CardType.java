@@ -9,7 +9,8 @@ package entity;
 public enum CardType {
 
     /**
-     * The Card Types
+     * The Card Types.
+     *
      */
     INFANTRY, CAVALRY, ARTILLERY
 }
