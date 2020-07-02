@@ -1,15 +1,15 @@
 # RiskGame
 This game is developed based on both Risk (Game) and Domination (Risk Board Game). For more details please check the below links:
-https://en.wikipedia.org/wiki/Risk_(game)
-https://sourceforge.net/projects/domination/
+- https://en.wikipedia.org/wiki/Risk_(game)
+- https://sourceforge.net/projects/domination/
 
 
 # Game Rules
 The rules of this game is designed based on the following links, please check the links:
-https://www.hasbro.com/common/instruct/risk.pdf
-https://media.wizards.com/2015/downloads/ah/Risk_rules.pdf
-https://www.ultraboardgames.com/risk/game-rules.php
-https://www.wikihow.com/Play-Risk
+- https://www.hasbro.com/common/instruct/risk.pdf
+- https://media.wizards.com/2015/downloads/ah/Risk_rules.pdf
+- https://www.ultraboardgames.com/risk/game-rules.php
+- https://www.wikihow.com/Play-Risk
 
 
 ## Risk Game development
