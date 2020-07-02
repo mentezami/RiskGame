@@ -1,6 +1,6 @@
 # RiskGame
 This game is developed based on both Risk (Game) and Domination (Risk Board Game). For more details please check the below links:
-https://en.wikipedia.org/wiki/Risk_(game)  and  
+https://en.wikipedia.org/wiki/Risk_(game)
 https://sourceforge.net/projects/domination/
 
 
