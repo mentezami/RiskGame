@@ -97,7 +97,7 @@ public class MapReaderTest {
     }
 
     /**
-     * This method tests readMapFile methods by passing a map file with countries without continents.
+     * This method tests readMapFile methods by passing a map file with countries without border.
      *
      */
     @Test
