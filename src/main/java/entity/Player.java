@@ -119,7 +119,7 @@ public class Player {
     /**
      * Setter method to assign country to the player.
      *
-     * @param assignedCountry is an country object to assign to a player.
+     * @param assignedCountry is a country object to assign to a player.
      */
     public void setAssignedCountry(Country assignedCountry) {
         this.assignedCountry.add(assignedCountry);
