@@ -29,8 +29,8 @@ public class Country {
      *
      */
     public Country() {
-        neighborCountries = new ArrayList<String>();
-        adjacentCountries = new ArrayList<Country>();
+        neighborCountries = new ArrayList<>();
+        adjacentCountries = new ArrayList<>();
     }
 
     /**
@@ -56,7 +56,7 @@ public class Country {
     /**
      * Setter method for the player.
      *
-     * @param player
+     * @param player is an object from Player class.
      */
     public void setPlayer(Player player) {
         this.player = player;
@@ -74,7 +74,7 @@ public class Country {
     /**
      * Setter method for the country armies count.
      *
-     * @param army
+     * @param army is the number armies.
      */
     public void setArmy(int army) {
         if (army > 5000) {
@@ -96,7 +96,7 @@ public class Country {
     /**
      * Setter method for the country name.
      *
-     * @param name
+     * @param name is the name of country
      */
     public void setName(String name) {
         this.name = name;
@@ -115,7 +115,7 @@ public class Country {
     /**
      * Setter method for the X coordinate of the country.
      *
-     * @param xCoordinate
+     * @param xCoordinate is for showing x coordinate of the country
      */
     public void setxCoordinate(int xCoordinate) {
         this.xCoordinate = xCoordinate;
@@ -133,7 +133,7 @@ public class Country {
     /**
      * Setter method for the y coordinate of the country.
      *
-     * @param yCoordinate set yCoordinate
+     * @param yCoordinate is for showing y coordinate of the country
      */
     public void setyCoordinate(int yCoordinate) {
         this.yCoordinate = yCoordinate;
@@ -151,7 +151,7 @@ public class Country {
     /**
      * Setter method to set the continent for the country.
      *
-     * @param belongToContinent
+     * @param belongToContinent a continent that the country is belonged it.
      */
     public void setBelongToContinent(Continent belongToContinent) {
         this.belongToContinent = belongToContinent;
@@ -169,7 +169,7 @@ public class Country {
     /**
      * Setter method for the adjacent countries to the country.
      *
-     * @param neighborCountries
+     * @param neighborCountries is the list of neighbor countries names.
      */
     public void setNeighborCountries(List <String> neighborCountries) {
         this.neighborCountries = neighborCountries;
@@ -187,7 +187,7 @@ public class Country {
     /**
      * Setter method for the adjacent countries to the countries.
      *
-     * @param adjacentCountries
+     * @param adjacentCountries is the list of adjacent countries objects.
      */
     public void setAdjacentCountries(List <Country> adjacentCountries) {
         this.adjacentCountries = adjacentCountries;
@@ -205,7 +205,7 @@ public class Country {
     /**
      * Setter method for the country as processed.
      *
-     * @param isProcessed
+     * @param isProcessed is for checking checked countries.
      */
     public void setVisited(boolean isProcessed) {
         this.isVisited = isProcessed;

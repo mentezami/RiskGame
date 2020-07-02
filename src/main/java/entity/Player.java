@@ -30,8 +30,8 @@ public class Player {
         super();
         this.id = id;
         this.name = name;
-        this.assignedCountry = new ArrayList<Country>();
-        this.cardList = new ArrayList<Card>();
+        this.assignedCountry = new ArrayList<>();
+        this.cardList = new ArrayList<>();
         this.numberOfCardsExchanged = 0;
     }
 
@@ -47,7 +47,7 @@ public class Player {
     /**
      * set cards of the player
      *
-     * @param cardList
+     * @param cardList is the list of card objects.
      */
     public void setCardList(List<Card> cardList) {
         this.cardList = cardList;
@@ -119,7 +119,7 @@ public class Player {
     /**
      * Setter method to assign country to the player.
      *
-     * @param assignedCountry
+     * @param assignedCountry is a country object to assign to a player.
      */
     public void setAssignedCountry(Country assignedCountry) {
         this.assignedCountry.add(assignedCountry);
@@ -137,7 +137,7 @@ public class Player {
     /**
      * Setter method for the cards exchanged.
      *
-     * @param numberOfCardsExchanged
+     * @param numberOfCardsExchanged is a number of exchanged cards.
      */
     public void setNumberOfTimesCardsExchanged(int numberOfCardsExchanged) {
         this.numberOfCardsExchanged = numberOfCardsExchanged;
