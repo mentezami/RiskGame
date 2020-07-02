@@ -32,33 +32,33 @@ are noted in italics.
 
 #### User-driven creation of map elements: country, continent and connectivity between countries.
 
-##### Map editor commands
+##### Map editor commands:
 
-###### Commands for creating and editing continents:
+##### Commands for creating and editing continents:
 - editcontinent -add continentname continentvalue 
 - editcontinent -remove continentname
 
-###### Commands for creating and editing countries:
+##### Commands for creating and editing countries:
 - editcountry -add countryname continentname
 - editcountry -remove countryname
 
-###### Commands for adding or removing neighbor countries:
+##### Commands for adding or removing neighbor countries:
 - editneighbor -add countryname neighborcountryname
 - editneighbor -remove countryname neighborcountryname
 
-###### Command for seeing the map:
+##### Command for seeing the map:
 - showmap (show all continents and countries and their neighbors)
 
-###### Command for saving the map as a file:(Extention format should be ".map")
+##### Command for saving the map as a file:(Extention format should be ".map")
 - savemap filename: Saving a map to a text file exactly as edited (using the "domination" game map format).
 
-###### Command fot editing the map file:
+##### Command fot editing the map file:
 - editmap filename: Loading a map from an existing "domination" map file to edit or create a new map from scratch if the file does not exist.
 
 ##### Verification and validation of the map:
 The map should be automatically validated upon loading and before saving (at least 3 types of incorrect maps). 
 The validatemap command can be triggered anytime during map editing.
-###### Command for verifing and validating the map file:
+##### Command for verifing and validating the map file:
 - validatemap
 
 ##### Command for loading the existing or validated map file:
