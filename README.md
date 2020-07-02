@@ -35,34 +35,34 @@ are noted in italics.
 ##### Map editor commands
 
 ###### Commands for creating and editing continents:
-. editcontinent -add continentname continentvalue 
-. editcontinent -remove continentname
+- editcontinent -add continentname continentvalue 
+- editcontinent -remove continentname
 
 ###### Commands for creating and editing countries:
-. editcountry -add countryname continentname
-. editcountry -remove countryname
+- editcountry -add countryname continentname
+- editcountry -remove countryname
 
 ###### Commands for adding or removing neighbor countries:
-. editneighbor -add countryname neighborcountryname
-. editneighbor -remove countryname neighborcountryname
+- editneighbor -add countryname neighborcountryname
+- editneighbor -remove countryname neighborcountryname
 
 ###### Command for seeing the map:
-. showmap (show all continents and countries and their neighbors)
+- showmap (show all continents and countries and their neighbors)
 
 ###### Command for saving the map as a file:(Extention format should be ".map")
-. savemap filename: Saving a map to a text file exactly as edited (using the "domination" game map format).
+- savemap filename: Saving a map to a text file exactly as edited (using the "domination" game map format).
 
 ###### Command fot editing the map file:
-. editmap filename: Loading a map from an existing "domination" map file to edit or create a new map from scratch if the file does not exist.
+- editmap filename: Loading a map from an existing "domination" map file to edit or create a new map from scratch if the file does not exist.
 
 ##### Verification and validation of the map:
 The map should be automatically validated upon loading and before saving (at least 3 types of incorrect maps). 
 The validatemap command can be triggered anytime during map editing.
 ###### Command for verifing and validating the map file:
-. validatemap
+- validatemap
 
 ##### Command for loading the existing or validated map file:
-. loadmap
+- loadmap
 
 ===============================================================================================================================================================
 
@@ -71,35 +71,35 @@ The validatemap command can be triggered anytime during map editing.
 #### Player Editor
 
 ##### Command for creating and removing players: 
-. gameplayer -add playername
-. gameplayer -remove playername
+- gameplayer -add playername
+- gameplayer -remove playername
 
 ##### Command for populating countries to the players: 
-. populatecountries
+- populatecountries
 
 ===============================================================================================================================================================
 
 ### Reinforcement Phase
 
 #### Reinforcement phase commands:
-. reinforce countryname num (until all reinforcement armies allocated to the player have been placed)
-. exchangecards num num num –none (exchange three cards from the hand, as specified by three numbers that represent the position of the exchanged cards in the player’s hand. If –none is specified, choose to not exchange cards.)
+- reinforce countryname num (until all reinforcement armies allocated to the player have been placed)
+- exchangecards num num num –none (exchange three cards from the hand, as specified by three numbers that represent the position of the exchanged cards in the player’s hand. If –none is specified, choose to not exchange cards.)
 
 ===============================================================================================================================================================
 
 ### Attack Phase
 
 #### Attack phase commands:
-. attack countrynamefrom countynameto numdice –allout –noattack (do a single attack from countrynamefrom to countynameto using numdice number of dice. If –allout is specified, attack until no attack is possible using maximum number of dice to attack/defend. If –noattack is specified, stop attacking, ending the attack phase.)
-. defend numdice (after attack is declared, defender chooses number of dice to defend with)
-. attackmove num (After a country has been conquered, move num number of armies to this country from the attacking country.)
+- attack countrynamefrom countynameto numdice –allout –noattack (do a single attack from countrynamefrom to countynameto using numdice number of dice. If –allout is specified, attack until no attack is possible using maximum number of dice to attack/defend. If –noattack is specified, stop attacking, ending the attack phase.)
+- defend numdice (after attack is declared, defender chooses number of dice to defend with)
+- attackmove num (After a country has been conquered, move num number of armies to this country from the attacking country.)
 
 ===============================================================================================================================================================
 
 ### Fortification Phase
 
 #### Fortification phase commands:
-. fortify fromcountry tocountry num –none (move num number of armies from fromcountry to tocountry. If –none is specified, choose to not do a move during the fortification phase)
+- fortify fromcountry tocountry num –none (move num number of armies from fromcountry to tocountry. If –none is specified, choose to not do a move during the fortification phase)
 
 ===============================================================================================================================================================
 
