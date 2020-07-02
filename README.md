@@ -26,7 +26,7 @@ This version is designed and developed based on the MVC Architectural Paterrn an
 dash. Either or both options can be used and may be used multiple times in a command. Command parameters
 are noted in italics.
 
-===============================================================================================================================================================
+======================================================================================
 
 ### Map Editor
 
@@ -64,7 +64,7 @@ The validatemap command can be triggered anytime during map editing.
 ##### Command for loading the existing or validated map file:
 - loadmap
 
-===============================================================================================================================================================
+======================================================================================
 
 ### Startup Phase
 
@@ -77,7 +77,7 @@ The validatemap command can be triggered anytime during map editing.
 ##### Command for populating countries to the players: 
 - populatecountries
 
-===============================================================================================================================================================
+======================================================================================
 
 ### Reinforcement Phase
 
@@ -85,7 +85,7 @@ The validatemap command can be triggered anytime during map editing.
 - reinforce countryname num (until all reinforcement armies allocated to the player have been placed)
 - exchangecards num num num –none (exchange three cards from the hand, as specified by three numbers that represent the position of the exchanged cards in the player’s hand. If –none is specified, choose to not exchange cards.)
 
-===============================================================================================================================================================
+======================================================================================
 
 ### Attack Phase
 
@@ -94,14 +94,14 @@ The validatemap command can be triggered anytime during map editing.
 - defend numdice (after attack is declared, defender chooses number of dice to defend with)
 - attackmove num (After a country has been conquered, move num number of armies to this country from the attacking country.)
 
-===============================================================================================================================================================
+======================================================================================
 
 ### Fortification Phase
 
 #### Fortification phase commands:
 - fortify fromcountry tocountry num –none (move num number of armies from fromcountry to tocountry. If –none is specified, choose to not do a move during the fortification phase)
 
-===============================================================================================================================================================
+======================================================================================
 
 ### Game Play
 - Implementation of a game driver implementing and controlling the game phases according to the Risk rules.
