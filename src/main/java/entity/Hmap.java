@@ -57,7 +57,7 @@ public class Hmap {
     /**
      * This sets the map data.
      *
-     * @param mapData
+     * @param mapData is the all corresponding data for the map.
      */
     public void setMapData(HashMap <String, String> mapData) {
         filesAttribute = mapData;

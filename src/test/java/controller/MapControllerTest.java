@@ -110,6 +110,7 @@ public class MapControllerTest {
     /**
      * This method tests the updateContinent method for MapController class.
      *
+     * @throws InvalidMap (Exception)
      */
     @Test
     public void updateContinentTest() throws InvalidMap {
@@ -199,6 +200,7 @@ public class MapControllerTest {
     /**
      * This method tests the updateCountry method for MapController class.
      *
+     * @throws InvalidMap (Exception)
      */
     @Test
     public void updateCountryTest() throws InvalidMap {
